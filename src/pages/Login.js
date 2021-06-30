@@ -11,7 +11,13 @@ function Login() {
 
   function submitLogin(event) {
     event.preventDefault();
-    history.push('/');
+    localStorage.setItem('mealsToken', '1');
+    localStorage.setItem('cocktailsToken', '1');
+    const emailToken = {
+      email,
+    };
+    localStorage.setItem('user', JSON.stringify(emailToken));
+    history.push('/comidas');
   }
 
   function validateEmail(em) {
