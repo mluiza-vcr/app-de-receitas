@@ -1,8 +1,11 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 function ReceitasFeitas() {
   return (
-    <h2>Receitas Feitas</h2>
+    <div>
+      <Header title="Receitas Feitas" />
+    </div>
   );
 }
 
