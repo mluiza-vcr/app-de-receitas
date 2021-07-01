@@ -7,11 +7,13 @@ function LoginProvider({ children }) {
   const [senha, setSenha] = useState('');
 
   return (
-    <LoginContext.Provider
-      value={ { email, senha, setEmail, setSenha } }
-    >
-      {children}
-    </LoginContext.Provider>
+    <div>
+      <LoginContext.Provider
+        value={ { email, senha, setEmail, setSenha } }
+      >
+        {children}
+      </LoginContext.Provider>
+    </div>
   );
 }
 

@@ -1,10 +1,11 @@
 import React from 'react';
-import MenuInferior from '../components/MenuInferior';
+import Header from '../Components/Header';
+import MenuInferior '../components/MenuInferior';
 
 function ExplorarComIngre() {
   return (
     <div>
-      <h2>Explorar com ingredientes</h2>
+      <Header title="Explorar Ingredientes" />
       <MenuInferior />
     </div>
   );

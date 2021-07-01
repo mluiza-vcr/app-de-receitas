@@ -1,11 +1,13 @@
 import React from 'react';
+import Header from '../Components/Header';
 import MenuInferior from '../components/MenuInferior';
 
 function ExplorarBebIngre() {
   return (
     <div>
-      <h2>Explorar Bebidas com Ingredientes</h2>
+      <Header title="Explorar Ingredientes" />
       <MenuInferior />
+
     </div>
   );
 }

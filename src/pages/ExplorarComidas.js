@@ -1,10 +1,11 @@
 import React from 'react';
+import Header from '../Components/Header';
 import MenuInferior from '../components/MenuInferior';
 
 function ExplorarComidas() {
   return (
     <div>
-      <h2>Explorar Comidas</h2>
+      <Header title="Explorar Comidas" />
       <MenuInferior />
     </div>
   );

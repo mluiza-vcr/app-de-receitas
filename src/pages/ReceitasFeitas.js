@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from '../Components/Header';
 
 function ReceitasFeitas() {
   return (
     <div>
-      Ola
+      <Header title="Receitas Feitas" />
     </div>
   );
 }

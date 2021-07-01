@@ -1,11 +1,13 @@
 import React from 'react';
 
-function ProcessoComida() {
+function ProcessoDeComida() {
   return (
     <div>
-      ProcessoComida
+      <h2>
+        Processo de comida
+      </h2>
     </div>
   );
 }
 
-export default ProcessoComida;
+export default ProcessoDeComida;
