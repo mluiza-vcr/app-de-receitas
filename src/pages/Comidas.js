@@ -8,7 +8,7 @@ function Comidas() {
     <div>
       <Header title="Comidas" />
       <SearchBarBtn />
-      <MenuInferior />
+        <MenuInferior />
      </div>
   );
 }
