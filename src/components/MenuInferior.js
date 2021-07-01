@@ -9,28 +9,13 @@ function MenuInferior() {
   return (
     <footer data-testid="footer">
       <Link to="/bebidas">
-        <button
-          type="button"
-          data-testid="drinks-bottom-btn"
-        >
-          <img src={ drinkIcon } alt="icone-bebidas" />
-        </button>
+        <img data-testid="drinks-bottom-btn" src={ drinkIcon } alt="icone-bebidas" />
       </Link>
       <Link to="/explorar">
-        <button
-          type="button"
-          data-testid="explore-bottom-btn"
-        >
-          <img src={ exploreIcon } alt="explorar" />
-        </button>
+        <img data-testid="explore-bottom-btn" src={ exploreIcon } alt="explorar" />
       </Link>
       <Link to="/comidas">
-        <button
-          type="button"
-          data-testid="food-bottom-btn"
-        >
-          <img src={ mealIcon } alt="pagina de comidas" />
-        </button>
+        <img data-testid="food-bottom-btn" src={ mealIcon } alt="pagina de comidas" />
       </Link>
     </footer>
   );
