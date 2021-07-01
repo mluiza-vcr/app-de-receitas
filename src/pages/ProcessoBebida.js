@@ -8,4 +8,4 @@ function ProcessoBebida() {
   );
 }
 
-export default ProcessoDeBebida;
+export default ProcessoBebida;
