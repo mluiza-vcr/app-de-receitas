@@ -1,0 +1,55 @@
+body {
+  background-color: #EAF2D7
+}
+
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  align-content: space-around;
+}
+
+.buttons-container > button {
+  align-items: center;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.receitas-feitas {
+  background-color: #E27396;
+  border: 3px solid black;
+  color: black;
+}
+
+.receitas-feitas:hover {
+  background-color: #EA9AB2;
+  border: black;
+}
+
+.receitas-favoritas {
+  background-color: #B3DEE2;
+  border: 3px solid black;
+  color: black;
+}
+
+.receitas-favoritas:hover {
+  background-color: #7fdbe4;;;
+  border: black;
+}
+
+.sair {
+  background-color: #EFCFE3;
+  border: 3px solid black;
+  color: black;
+}
+
+.sair:hover {
+  background-color: #e4a3cb;
+  border: black;
+}
+
+.email {
+  text-align: center;
+  border: 3px solid black;;
+  background-color: #EFCFE3;
+}
