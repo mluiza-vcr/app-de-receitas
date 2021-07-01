@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { Form, Button } from 'react-bootstrap/';
 import LoginContext from '../context/LoginContext';
+import '../components/Login.css';
 
 /** Source: https://react-bootstrap.netlify.app/components/forms/#forms */
 
@@ -31,10 +32,9 @@ function Login() {
   }
 
   return (
-    <div>
+    <div className="login-input">
       <Form onSubmit={ submitLogin }>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
           <Form.Control
             value={ email }
             onChange={ (ev) => setEmail(ev.target.value) }
@@ -46,7 +46,6 @@ function Login() {
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
           <Form.Control
             value={ senha }
             onChange={ (ev) => setSenha(ev.target.value) }
@@ -58,10 +57,11 @@ function Login() {
           />
         </Form.Group>
         <Button
-          variant="primary"
+          variant="outline-success"
           type="submit"
           data-testid="login-submit-btn"
           disabled={ validateLogin() }
+          className="btn-color"
         >
           Login
         </Button>

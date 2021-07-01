@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Components/Header';
-import MenuInferior from '../components/MenuInferior';
+import MenuInferior from '../Components/MenuInferior';
 
 function ExplorarBebIngre() {
   return (
