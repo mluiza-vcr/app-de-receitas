@@ -1,5 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './MenuInferior.css';
+import drinkIcon from '../images/drinkIcon.svg';
+import exploreIcon from '../images/exploreIcon.svg';
+import mealIcon from '../images/mealIcon.svg';
 
 function MenuInferior() {
   return (
@@ -9,7 +13,7 @@ function MenuInferior() {
           type="button"
           data-testid="drinks-bottom-btn"
         >
-          pagina de drinks
+          <img src={ drinkIcon } alt="icone-bebidas" />
         </button>
       </Link>
       <Link to="/explorar">
@@ -17,7 +21,7 @@ function MenuInferior() {
           type="button"
           data-testid="explore-bottom-btn"
         >
-          Explorar
+          <img src={ exploreIcon } alt="explorar" />
         </button>
       </Link>
       <Link to="/comidas">
@@ -25,7 +29,7 @@ function MenuInferior() {
           type="button"
           data-testid="food-bottom-btn"
         >
-          Pagina de comidas
+          <img src={ mealIcon } alt="pagina de comidas" />
         </button>
       </Link>
     </footer>
