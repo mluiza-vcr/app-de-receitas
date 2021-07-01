@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import LoginContext from './LoginContext';
 
 function LoginProvider({ children }) {
-  const [email, setEmail] = useState();
+  const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
   return (

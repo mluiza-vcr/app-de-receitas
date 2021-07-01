@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory } from 'react-router';
-import LoginContext from '../context/LoginContext';
+import '../css/Perfil.css';
 
 function Perfil() {
-  const { email } = useContext(LoginContext);
+  const emailLocalStorage = JSON.parse(localStorage.getItem('user'));
   const history = useHistory();
 
   function resetProfile() {
@@ -13,28 +13,33 @@ function Perfil() {
 
   return (
     <main>
-      <span data-testid="profile-email">{email}</span>
-      <button
-        type="button"
-        data-testid="profile-done-btn"
-        onClick={ () => history.push('/receitas-feitas') }
-      >
-        Receitas Feitas
-      </button>
-      <button
-        type="button"
-        data-testid="profile-favorite-btn"
-        onClick={ () => history.push('/receitas-favoritas') }
-      >
-        Receitas Favoritas
-      </button>
-      <button
-        type="button"
-        data-testid="profile-logout-btn"
-        onClick={ resetProfile }
-      >
-        Sair
-      </button>
+      <div data-testid="profile-email" className="email">{emailLocalStorage.email}</div>
+      <div className="buttons-container">
+        <button
+          type="button"
+          data-testid="profile-done-btn"
+          onClick={ () => history.push('/receitas-feitas') }
+          className="btn btn-primary btn-lg receitas-feitas"
+        >
+          Receitas Feitas
+        </button>
+        <button
+          type="button"
+          data-testid="profile-favorite-btn"
+          onClick={ () => history.push('/receitas-favoritas') }
+          className="btn btn-primary btn-lg receitas-favoritas"
+        >
+          Receitas Favoritas
+        </button>
+        <button
+          type="button"
+          data-testid="profile-logout-btn"
+          onClick={ resetProfile }
+          className="btn btn-primary btn-lg sair"
+        >
+          Sair
+        </button>
+      </div>
     </main>
   );
 }
