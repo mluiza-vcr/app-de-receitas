@@ -6,8 +6,10 @@ import MenuInferior from '../Components/MenuInferior';
 function Comidas() {
   return (
     <div>
-      <Header title="Comidas" />
-      <SearchBarBtn />
+      <div className="header-container">
+        <Header title="Comidas" />
+        <SearchBarBtn />
+      </div>
       <MenuInferior />
     </div>
   );

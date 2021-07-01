@@ -1,5 +1,6 @@
 .header-container {
   align-items: stretch;
+  justify-content: space-between;
   background-color: #ea9ab2;
   display: flex;
   height: 8vh;
@@ -10,5 +11,14 @@
 
 h2 {
   display: flex;
-  justify-items: center;
+  margin-right: 20%;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+}
+
+img {
+  height: 7vh;
 }

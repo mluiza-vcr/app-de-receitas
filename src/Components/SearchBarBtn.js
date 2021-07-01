@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { string } from 'prop-types';
 import SearchBar from './SearchBar';
 import imgSearch from '../images/searchIcon.svg';
+import '../Style/Header.css';
 
 function SearchBarBtn({ title }) {
   const [searchBar, setSearchBar] = useState(false);
