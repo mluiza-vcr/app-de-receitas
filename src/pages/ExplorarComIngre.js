@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from '../Components/Header';
-import MenuInferior  '../components/MenuInferior';
+import MenuInferior '../components/MenuInferior';
 
 function ExplorarComIngre() {
   return (
