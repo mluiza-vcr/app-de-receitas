@@ -3,9 +3,7 @@ import React from 'react';
 function DetalhesBebidas() {
   return (
     <div>
-      <h2>
-        Detalhes de Bebidas
-      </h2>
+      <h2>Detalhes Bebidas</h2>
     </div>
   );
 }

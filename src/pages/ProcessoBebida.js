@@ -1,11 +1,9 @@
 import React from 'react';
 
-function ProcessoDeBebida() {
+function ProcessoBebida() {
   return (
     <div>
-      <h2>
-        Processo de Bebida
-      </h2>
+      Processo Bebida
     </div>
   );
 }

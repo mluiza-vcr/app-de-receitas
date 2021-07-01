@@ -6,8 +6,8 @@ function ProcessoDeComida() {
       <h2>
         Processo de comida
       </h2>
-    </div>
   );
 }
 
 export default ProcessoDeComida;
+
