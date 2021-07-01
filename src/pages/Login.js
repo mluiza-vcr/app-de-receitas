@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { Form, Button } from 'react-bootstrap/';
 import LoginContext from '../context/LoginContext';
-import '../components/Login.css';
+import '../Style/Login.css';
 
 /** Source: https://react-bootstrap.netlify.app/components/forms/#forms */
 

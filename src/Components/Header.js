@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 import imgProfile from '../images/profileIcon.svg';
-import '../components/Header.css';
+import '../Style/Header.css';
 
 function Header({ title }) {
   return (
