@@ -5,7 +5,7 @@ import Header from '../Components/Header';
 import '../Style/Perfil.css';
 
 function Perfil() {
-  const emailLocalStorage = JSON.parse(localStorage.getItem('user'));
+  // const emailLocalStorage = JSON.parse(localStorage.getItem('user')).email;
   const history = useHistory();
 
   function resetProfile() {
@@ -20,7 +20,7 @@ function Perfil() {
         data-testid="profile-email"
         className="email"
       >
-        {emailLocalStorage && emailLocalStorage.email}
+        {localStorage.getItem('user') && JSON.parse(localStorage.getItem('user')).email}
       </div>
       <div className="buttons-container">
         <button
