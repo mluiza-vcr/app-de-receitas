@@ -1,5 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
+import MenuInferior from '../components/MenuInferior';
+import Header from '../Components/Header';
 import '../css/Perfil.css';
 
 function Perfil() {
@@ -13,7 +15,13 @@ function Perfil() {
 
   return (
     <main>
-      <div data-testid="profile-email" className="email">{emailLocalStorage.email}</div>
+      <Header />
+      <div
+        data-testid="profile-email"
+        className="email"
+      >
+        {emailLocalStorage && emailLocalStorage.email}
+      </div>
       <div className="buttons-container">
         <button
           type="button"
@@ -40,6 +48,7 @@ function Perfil() {
           Sair
         </button>
       </div>
+      <MenuInferior />
     </main>
   );
 }
