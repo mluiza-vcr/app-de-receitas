@@ -3,7 +3,7 @@ import DrinkList from '../components/DrinkList';
 import Header from '../Components/Header';
 import SearchBarBtn from '../Components/SearchBarBtn';
 import MenuInferior from '../Components/MenuInferior';
-// testse
+// testsea
 
 function Bebidas() {
   return (
