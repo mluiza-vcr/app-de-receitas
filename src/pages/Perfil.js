@@ -1,8 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import MenuInferior from '../components/MenuInferior';
+import MenuInferior from '../Components/MenuInferior';
 import Header from '../Components/Header';
-import '../css/Perfil.css';
+import '../Style/Perfil.css';
 
 function Perfil() {
   const emailLocalStorage = JSON.parse(localStorage.getItem('user'));
@@ -15,7 +15,7 @@ function Perfil() {
 
   return (
     <main>
-      <Header />
+      <Header title="Perfil" />
       <div
         data-testid="profile-email"
         className="email"

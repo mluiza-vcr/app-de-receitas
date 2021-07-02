@@ -3,16 +3,16 @@ body {
 }
 
 .buttons-container {
+  align-content: space-around;
   display: flex;
   flex-direction: column;
   margin-top: 100px;
-  align-content: space-around;
 }
 
 .buttons-container > button {
   align-items: center;
-  padding: 20px;
   margin-top: 50px;
+  padding: 20px;
 }
 
 .receitas-feitas {
@@ -49,7 +49,7 @@ body {
 }
 
 .email {
-  text-align: center;
-  border: 3px solid black;;
   background-color: #EFCFE3;
+  border: 3px solid black;;
+  text-align: center;
 }
