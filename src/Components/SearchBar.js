@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useRouteMatch } from 'react-router';
-import SearchContext from '../context/SearchContext';
+import { Button } from 'react-bootstrap';
 import { endpointFood, endpointDrink, fetchTudo } from '../services/Apis';
+import SearchContext from '../context/SearchContext';
 import '../Style/SearchBar.css';
 
 function SearchBar() {
@@ -24,6 +24,7 @@ function SearchBar() {
 
   useEffect(() => {
     validateKeys();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const responseApi = async (endpoint) => {
