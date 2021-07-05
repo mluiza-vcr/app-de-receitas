@@ -1,19 +1,7 @@
 .searchBar {
-  margin-bottom: 2vh;
+  /* margin-bottom: 2vh; */
   display: flex;
   flex-direction: column;
   margin-top: 3vh;
-  margin-right: 80%;
   flex-wrap: wrap;
-}
-
-.radiosSearchBar {
-  width: 100%;
-  display: flex;
-  justify-content: space-around;
-}
-
-.radiosSearchBar input {
-  margin-right: 4px;
-  outline: none;
 }

@@ -1,58 +1,31 @@
-import React, { useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
-import { getFoodIngredient, getDrinkIngredient, getLetterFood, getLetterDrink,
-  getDrinkName, getFoodName } from '../services/Apis';
+import SearchContext from '../context/SearchContext';
+import { endpointFood, endpointDrink, fetchTudo } from '../services/Apis';
+import { useRouteMatch } from 'react-router';
 import '../Style/SearchBar.css';
 
 function SearchBar() {
-  const [searchValue, setSearchValue] = useState({
-    search: '',
-    check: '',
-  });
-  const { search, check } = searchValue;
+  const [apiResponse, setApiResponse] = useState([]);
+  const [apisKeys, setApisKeys] = useState('');
+  const [radioButtonName, setRadioButtonName] = useState('');
+  const { setFilterByText, filterByText } = useContext(SearchContext);
+  const { path } = useRouteMatch();
 
-  const firstLetter = 'first-letter';
+  useEffect(() => {
+    console.log(path);
+  }, []);
 
-  const handleSearch = async () => {
-    switch ('Comidas') {
-    case
-      check === 'ingredient':
-      await getFoodIngredient(search);
-      break;
-    case
-      check === 'name':
-      await getFoodName(search);
-      break;
-    case
-      check === firstLetter:
-      await getLetterFood(search);
-      break;
-    default:
-    }
-    switch ('Bebidas') {
-    case check === 'ingredient':
-      await getDrinkIngredient(search);
-      break;
-    case check === 'name':
-      await getDrinkName(search);
-      break;
-    case check === firstLetter:
-      await getLetterDrink(search);
-      break;
-    default:
-    }
-  };
-
-  const handleChange = ({ target }) => {
-    if (search.length > 1 && check === firstLetter) {
-      alert('Sua busca deve conter somente 1 (um) caracter');
-    }
-    if (target.name === 'check') {
-      setSearchValue({ ...searchValue, check: target.value });
+  const responseApi = async (endpoint) => {
+    const response = await fetchTudo(endpoint(filterByText)[radioButtonName]);
+    console.log(response);
+    if (response === null) {
+      setApiResponse([]);
     } else {
-      setSearchValue({ ...searchValue, search: target.value });
+      console.log(setApiResponse(response[radioButtonName]));
     }
   };
+
   return (
     <div className="searchBar">
       <div className="radiosSearchBar">
@@ -61,34 +34,37 @@ function SearchBar() {
           placeholder="Search Recipe"
           data-testid="search-input"
           className="text"
-          onChange={ handleChange }
+          onChange={ (e) => setFilterByText(e.target.value) }
         />
         <label htmlFor="name">
           Ingrediente
           <input
             type="radio"
+            name="Search"
             data-testid="ingredient-search-radio"
             className="radiosSearchBar"
-            onChange={ handleChange }
+            onClick={ () => setRadioButtonName('ingredient')}
           />
         </label>
         <label htmlFor="name">
           Nome
           <input
             type="radio"
+            name="Search"
             data-testid="name-search-radio"
             className="radiosSearchBar"
-            onChange={ handleChange }
+            onClick={ () => setRadioButtonName('name')}
           />
         </label>
         <label htmlFor="firstLetter">
           Primeira Letra
           <input
             type="radio"
+            name="Search"
             label="Primeira Letra"
             data-testid="first-letter-search-radio"
             className="radiosSearchBar"
-            onChange={ handleChange }
+            onClick={ () => setRadioButtonName('firstLetter') }
           />
         </label>
 
@@ -96,7 +72,7 @@ function SearchBar() {
       <Button
         variant="outline-danger"
         data-testid="exec-search-btn"
-        onClick={ handleSearch }
+        onClick={ responseApi }
       >
         Busca
       </Button>
