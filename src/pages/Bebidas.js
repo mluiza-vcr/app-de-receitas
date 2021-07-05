@@ -7,11 +7,10 @@ import MenuInferior from '../Components/MenuInferior';
 
 function Bebidas() {
   return (
-    <div>
-      <h2>Bebidas</h2>
-      <DrinkList />
+    <div className="header-container">
       <Header title="Bebidas" />
       <SearchBarBtn />
+      <DrinkList />
       <MenuInferior />
     </div>
   );
