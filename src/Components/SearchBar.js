@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
+import { useRouteMatch } from 'react-router';
 import SearchContext from '../context/SearchContext';
 import { endpointFood, endpointDrink, fetchTudo } from '../services/Apis';
-import { useRouteMatch } from 'react-router';
 import '../Style/SearchBar.css';
 
 function SearchBar() {
@@ -12,17 +12,59 @@ function SearchBar() {
   const { setFilterByText, filterByText } = useContext(SearchContext);
   const { path } = useRouteMatch();
 
+  const validateKeys = () => {
+    if (path === '/comidas') {
+      setApisKeys('meals');
+    }
+
+    if (path === '/bebidas') {
+      setApisKeys('drinks');
+    }
+  };
+
   useEffect(() => {
-    console.log(path);
+    validateKeys();
   }, []);
 
   const responseApi = async (endpoint) => {
-    const response = await fetchTudo(endpoint(filterByText)[radioButtonName]);
-    console.log(response);
-    if (response === null) {
-      setApiResponse([]);
-    } else {
-      console.log(setApiResponse(response[radioButtonName]));
+    const response = await fetchTudo(endpoint);
+    if (response[apisKeys] === null) {
+      return setApiResponse([]);
+    }
+    return setApiResponse(response[apisKeys]);
+  };
+
+  const handleSubmit = () => {
+    if (filterByText.length > 1 && radioButtonName === 'firstLetter') {
+      // eslint-disable-next-line no-alert
+      window.alert('Sua busca deve conter somente 1 (um) caracter');
+    }
+
+    if (path === '/comidas') {
+      responseApi(endpointFood(filterByText)[radioButtonName]);
+    }
+
+    if (path === '/bebidas') {
+      responseApi(endpointDrink(filterByText)[radioButtonName]);
+    }
+  };
+
+  const handleAPI = (title, image, id, alt) => (
+    apiResponse.map((item) => (
+      <div key={ item[id] }>
+        <h1>{item[title]}</h1>
+        <img src={ item[image] } alt={ alt } />
+      </div>
+    ))
+  );
+
+  const validateMap = () => {
+    if (path === '/comidas') {
+      return handleAPI('strMeal', 'strMealThumb', 'idMeal', 'comidas');
+    }
+
+    if (path === '/bebidas') {
+      return handleAPI('strDrink', 'strDrinkThumb', 'idDrink', 'bebidas');
     }
   };
 
@@ -43,7 +85,7 @@ function SearchBar() {
             name="Search"
             data-testid="ingredient-search-radio"
             className="radiosSearchBar"
-            onClick={ () => setRadioButtonName('ingredient')}
+            onClick={ () => setRadioButtonName('ingredient') }
           />
         </label>
         <label htmlFor="name">
@@ -53,7 +95,7 @@ function SearchBar() {
             name="Search"
             data-testid="name-search-radio"
             className="radiosSearchBar"
-            onClick={ () => setRadioButtonName('name')}
+            onClick={ () => setRadioButtonName('name') }
           />
         </label>
         <label htmlFor="firstLetter">
@@ -72,10 +114,11 @@ function SearchBar() {
       <Button
         variant="outline-danger"
         data-testid="exec-search-btn"
-        onClick={ responseApi }
+        onClick={ handleSubmit }
       >
         Busca
       </Button>
+      { validateMap() }
     </div>
   );
 }
