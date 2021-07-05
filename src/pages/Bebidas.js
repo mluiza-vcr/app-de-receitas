@@ -8,7 +8,6 @@ import SearchBarBtn from '../Components/SearchBarBtn';
 import MenuInferior from '../Components/MenuInferior';
 // testsea
 
-
 function Bebidas() {
   return (
     <div>
