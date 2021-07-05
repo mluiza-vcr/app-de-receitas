@@ -9,3 +9,27 @@ export async function getDrink() {
   const { drinks } = await response.json();
   return drinks;
 }
+
+export async function getMealCategories() {
+  const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
+  const mealCategories = await response.json();
+  return mealCategories.meals;
+}
+
+export async function getDrinkCategories() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
+  const drinkCategories = await response.json();
+  return drinkCategories.drinks;
+}
+
+export async function getFilterMealCategory(category) {
+  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+  const filterMealCategories = await response.json();
+  return filterMealCategories.meals;
+}
+
+export async function getFilterDrinkCategory(category) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+  const filterDrinkCategories = await response.json();
+  return filterDrinkCategories.drinks;
+}
