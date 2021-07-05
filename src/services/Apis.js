@@ -26,7 +26,8 @@ export async function fetchTudo(link) {
   const response = await fetch(link);
   const json = await response.json();
   return json;
-  
+}
+
 export async function getMealCategories() {
   const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?c=list');
   const mealCategories = await response.json();
