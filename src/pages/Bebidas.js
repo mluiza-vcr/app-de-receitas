@@ -1,5 +1,8 @@
 import React from 'react';
 import DrinkList from '../components/DrinkList';
+
+import ButtonDrinkCategories from '../components/ButtonDrinkCategories';
+
 import Header from '../Components/Header';
 import SearchBarBtn from '../Components/SearchBarBtn';
 import MenuInferior from '../Components/MenuInferior';
@@ -10,6 +13,7 @@ function Bebidas() {
     <div className="header-container">
       <Header title="Bebidas" />
       <SearchBarBtn />
+      <ButtonDrinkCategories />
       <DrinkList />
       <MenuInferior />
     </div>

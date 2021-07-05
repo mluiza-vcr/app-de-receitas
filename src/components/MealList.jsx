@@ -3,11 +3,19 @@ import MealCard from './MealCard';
 import FoodContext from '../context/FoodContext';
 
 function MealList() {
-  const { meals, fetchMeal } = useContext(FoodContext);
+  const { meals, fetchMeal, filterMeal, btnToggled } = useContext(FoodContext);
 
   useEffect(() => {
     fetchMeal();
   }, []);
+
+  if (filterMeal && btnToggled) {
+    return (
+      <div>
+        <MealCard meals={ filterMeal } />
+      </div>
+    );
+  }
 
   return (
     <div>
