@@ -17,7 +17,11 @@ function SearchBarBtn({ title }) {
   return (
     <div>
       <button type="button" onClick={ HandleSearch }>
-        <img src={ imgSearch } alt="Search" data-testid="search-top-btn" />
+        <img
+          data-testid="search-top-btn"
+          src={ imgSearch }
+          alt="Search"
+        />
       </button>
       { searchBar && <SearchBar title={ title } /> }
     </div>
