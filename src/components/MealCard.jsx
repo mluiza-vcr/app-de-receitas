@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import myContext from '../context/myContext';
 
 function MealCard({ meals }) {
   const maxLength = 12;
+  const { recipesFoods } = useContext(myContext);
+  const MAX_LENGTH_RECIPES = 12;
+  const foods = recipesFoods.slice(0, MAX_LENGTH_RECIPES);
   return (
     <div>
       {
-        meals.slice(0, maxLength).map((meal, index) => (
+        meals ? meals.slice(0, maxLength).map((meal, index) => (
           <Link to={ `/comidas/${meal.idMeal}` } key={ index }>
             <div
               key={ index }
@@ -27,6 +31,16 @@ function MealCard({ meals }) {
             </div>
           </Link>
         ))
+          : foods.map(({ idMeal, strMeal, strMealThumb }, index) => (
+            <div key={ idMeal } data-testid={ `${index}-recipe-card` }>
+              <img
+                src={ strMealThumb }
+                alt={ strMeal }
+                data-testid={ `${index}-card-img` }
+              />
+              <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
+            </div>
+          ))
       }
     </div>
   );
