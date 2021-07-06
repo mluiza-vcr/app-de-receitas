@@ -16,15 +16,15 @@ function MealCard({ meals }) {
               <span
                 data-testid={ `${index}-card-name` }
               >
-                {meal.strMeal}
-              </span>
-              <img
-                src={ meal.strMealThumb }
-                alt="meal thumb"
-                data-testid={ `${index}-card-img` }
-                width="70"
-              />
-            </div>
+              {meal.strMeal}
+            </span>
+            <img
+              src={ meal.strMealThumb }
+              alt="meal thumb"
+              data-testid={ `${index}-card-img` }
+              width="40"
+            />
+           </div>
           </Link>
         ))
       }
