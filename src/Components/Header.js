@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { string } from 'prop-types';
 import imgProfile from '../images/profileIcon.svg';
+import SearchBarBtn from './SearchBarBtn';
 import '../Style/Header.css';
 
 function Header({ title }) {
@@ -15,6 +16,7 @@ function Header({ title }) {
         />
       </Link>
       <h2 data-testid="page-title" className="page-title">{ title }</h2>
+      <SearchBarBtn />
     </div>
   );
 }
