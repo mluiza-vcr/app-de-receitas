@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import myContext from '../context/myContext';
-/* import MealList from '../components/MealList'; */
+import MealList from '../components/MealList';
 
 import ButtonMealCategories from '../components/ButtonMealCategories';
 
@@ -30,7 +30,7 @@ function Comidas() {
           <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
         </Link>
       ))}
-      {/* <MealList /> */}
+      <MealList />
       <MenuInferior />
     </div>
   );

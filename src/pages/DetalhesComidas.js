@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
+import getIngredientList from '../services/getIngredients';
 
 function DetalhesComidas() {
   const [recipes, setRecipes] = useState({});
+  const [ingredients, setIngredients] = useState([]);
 
   const { location: { pathname } } = useHistory();
   const splitPathName = pathname.split('/');
@@ -18,18 +20,41 @@ function DetalhesComidas() {
     fetchMealAPI();
   }, []);
 
-  const { strMeal } = recipes;
+  useEffect(() => {
+    setIngredients(getIngredientList(recipes));
+  }, [recipes]);
+
+  const { strMealThumb, strMeal, strCategory, strYoutube, strInstructions } = recipes;
+
+  let youTubeAdress = '';
+  if (strYoutube) {
+    youTubeAdress = strYoutube.split('=');
+  }
 
   return (
     <div>
-      <img data-testid="recipe-photo" src="" alt="" />
-      <h2 data-testid="recipe-title">Titulo da receita</h2>
+      <img data-testid="recipe-photo" width="350" src={ strMealThumb } alt="" />
+      <h2 data-testid="recipe-title">{strMeal}</h2>
       <button type="button" data-testid="share-btn">Share</button>
       <button type="button" data-testid="favorite-btn">Favoritar</button>
-      <p data-testid="recipe-category">Texto da categoria</p>
-      <p>ingredientes</p>
-      <p data-testid="instructions">Texto de instrucoes</p>
-      <iframe data-testid="video" src="https://www.youtube.com/embed/XxqA_vomQFI" title="description" />
+      <p data-testid="recipe-category">{strCategory}</p>
+      <ul>
+        <h1>Ingredientes</h1>
+        { ingredients.map(({ ingredient, amount }, index) => (
+          <li
+            key={ index }
+            data-testid={ `${index}-ingredient-name-and-measure` }
+          >
+            {`${ingredient} - ${amount}`}
+          </li>
+        ))}
+      </ul>
+      <p data-testid="instructions">{strInstructions}</p>
+      <iframe
+        data-testid="video"
+        src={ `https://www.youtube.com/embed/${youTubeAdress[1]}` }
+        title="video"
+      />
       <p>Card de receitas recomendadas</p>
       <button type="button" data-testid="start-recipe-btn">Iniciar receita</button>
     </div>
