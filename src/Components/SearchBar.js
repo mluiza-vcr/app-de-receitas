@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router';
+import { useRouteMatch, Redirect } from 'react-router';
 import { Button } from 'react-bootstrap';
 import { endpointFood, endpointDrink, fetchTudo } from '../services/Apis';
 import SearchContext from '../context/SearchContext';
@@ -29,8 +29,9 @@ function SearchBar() {
 
   const responseApi = async (endpoint) => {
     const response = await fetchTudo(endpoint);
-    if (response[apisKeys] === null) {
-      return setApiResponse([]);
+    if (response[apisKeys].length === 0) {
+      // eslint-disable-next-line no-alert
+      window.alert('Sinto muito, não encontramos nenhuma receita para esses filtros');
     }
     return setApiResponse(response[apisKeys]);
   };
@@ -50,14 +51,28 @@ function SearchBar() {
     }
   };
 
-  const handleAPI = (title, image, id, alt) => (
-    apiResponse.map((item) => (
-      <div key={ item[id] }>
-        <h1>{item[title]}</h1>
-        <img src={ item[image] } alt={ alt } />
+  const handleAPI = (title, image, id, alt) => {
+    if (apiResponse.length === 1) {
+      return <Redirect to={ `/${alt}/${apiResponse[0][id]}` } />;
+    }
+
+    const MAX_LENGHT_RECIPES = 12;
+    const foodsOrDrinks = apiResponse.slice(0, MAX_LENGHT_RECIPES);
+    return foodsOrDrinks.map((item, index) => (
+      <div
+        data-testid={ `${index}-recipe-card` }
+        key={ item[id] }
+      >
+        <h1 data-testid={ `${index}-card-name` }>{item[title]}</h1>
+        <img
+          data-testid={ `${index}-card-img` }
+          width="200"
+          src={ item[image] }
+          alt={ alt }
+        />
       </div>
-    ))
-  );
+    ));
+  };
 
   const validateMap = () => {
     if (path === '/comidas') {

@@ -8,7 +8,11 @@ function Header({ title }) {
   return (
     <div className="header-container">
       <Link to="/perfil">
-        <img src={ imgProfile } alt="Profile" data-testid="profile-top-btn" />
+        <img
+          data-testid="profile-top-btn"
+          src={ imgProfile }
+          alt="Profile"
+        />
       </Link>
       <h2 data-testid="page-title" className="page-title">{ title }</h2>
     </div>

@@ -9,15 +9,11 @@ import MenuInferior from '../Components/MenuInferior';
 
 function Comidas() {
   return (
-    <div>
-      <h2>Comidas</h2>
+    <div className="header-container">
+      <Header title="Comidas" />
+      <SearchBarBtn />
       <ButtonMealCategories />
       <MealList />
-      <div className="header-container">
-        <Header title="Comidas" />
-        <SearchBarBtn />
-        <MealList />
-      </div>
       <MenuInferior />
     </div>
   );
