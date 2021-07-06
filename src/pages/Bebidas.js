@@ -1,5 +1,6 @@
-import React from 'react';
-// import React, { useContext } from 'react';
+import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
+
 import DrinkList from '../components/DrinkList';
 // import myContext from '../context/myContext';
 
@@ -26,6 +27,7 @@ function Bebidas() {
             data-testid={ `${index}-card-img` }
           />
           <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
+
         </div>
       )) */}
       <DrinkList />
