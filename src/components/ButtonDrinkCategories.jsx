@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import FoodContext from '../context/FoodContext';
+import '../Style/BtnCategories.css';
 
 function ButtonDrinkCategories() {
   const {
@@ -17,6 +18,7 @@ function ButtonDrinkCategories() {
   useEffect(() => {
     fetchDrinkCategories();
     fetchDrinkFilterByCategory(catchBtnFilterDrink);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [0, catchBtnFilterDrink]);
 
   function handleClick(e) {
