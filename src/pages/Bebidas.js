@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react';
 
 import DrinkList from '../components/DrinkList';
 // import myContext from '../context/myContext';

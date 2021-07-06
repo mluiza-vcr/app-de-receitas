@@ -1,13 +1,11 @@
 import React from 'react';
 // import React, { useContext } from 'react';
 // import myContext from '../context/myContext';
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
-import myContext from '../context/myContext';
-import MealList from '../components/MealList';
+// import { Link } from 'react-router-dom';
+// import myContext from '../context/myContext';
 
-import ButtonMealCategories from '../components/ButtonMealCategories';
 import MealList from '../components/MealList';
+import ButtonMealCategories from '../components/ButtonMealCategories';
 import Header from '../Components/Header';
 import MenuInferior from '../Components/MenuInferior';
 
