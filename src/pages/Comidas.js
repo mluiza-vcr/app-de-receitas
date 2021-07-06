@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import MealList from '../components/MealList';
 import myContext from '../context/myContext';
 
 import ButtonMealCategories from '../components/ButtonMealCategories';

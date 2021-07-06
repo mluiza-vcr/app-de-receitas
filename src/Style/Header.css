@@ -1,8 +1,7 @@
 .header-container {
   display: flex;
   justify-content: space-around;
-}  
-
+}
 
 /* .header-container {
   align-items: stretch;
