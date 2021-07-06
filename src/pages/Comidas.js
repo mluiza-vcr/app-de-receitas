@@ -1,23 +1,26 @@
-import React from 'react';
-import MealList from '../components/MealList';
+import React, { useContext } from 'react';
+import myContext from '../context/myContext';
 
 import ButtonMealCategories from '../components/ButtonMealCategories';
 
 import Header from '../Components/Header';
-import SearchBarBtn from '../Components/SearchBarBtn';
 import MenuInferior from '../Components/MenuInferior';
 
 function Comidas() {
+  const { recipesFoods } = useContext(myContext);
+  const MAX_LENGTH_RECIPES = 12;
+  const foods = recipesFoods.slice(0, MAX_LENGTH_RECIPES);
   return (
-    <div>
-      <h2>Comidas</h2>
+    <div className="main-container">
+      <Header title="Comidas" />
       <ButtonMealCategories />
-      <MealList />
-      <div className="header-container">
-        <Header title="Comidas" />
-        <SearchBarBtn />
-        <MealList />
-      </div>
+      {foods.map(({ idMeal, strMeal, strMealThumb }, index) => (
+        <div key={ idMeal } data-testid={ `${index}-recipe-card` }>
+          <img src={ strMealThumb } alt={ strMeal } data-testid={ `${index}-card-img` } />
+          <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
+        </div>
+      ))}
+      {/* <MealList /> */}
       <MenuInferior />
     </div>
   );
