@@ -38,5 +38,4 @@ function Comidas() {
       <MenuInferior />
     </div>
   );
-}
 export default Comidas;
