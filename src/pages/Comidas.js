@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import myContext from '../context/myContext';
+/* import MealList from '../components/MealList'; */
 
 import ButtonMealCategories from '../components/ButtonMealCategories';
 
@@ -15,10 +17,18 @@ function Comidas() {
       <Header title="Comidas" />
       <ButtonMealCategories />
       {foods.map(({ idMeal, strMeal, strMealThumb }, index) => (
-        <div key={ idMeal } data-testid={ `${index}-recipe-card` }>
-          <img src={ strMealThumb } alt={ strMeal } data-testid={ `${index}-card-img` } />
+        <Link
+          to={ `/comidas/${idMeal}` }
+          key={ idMeal }
+          data-testid={ `${index}-recipe-card` }
+        >
+          <img
+            src={ strMealThumb }
+            alt={ strMeal }
+            data-testid={ `${index}-card-img` }
+          />
           <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
-        </div>
+        </Link>
       ))}
       {/* <MealList /> */}
       <MenuInferior />
