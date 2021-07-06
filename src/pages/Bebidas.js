@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import DrinkList from '../components/DrinkList';
 import myContext from '../context/myContext';
 
@@ -18,14 +19,18 @@ function Bebidas() {
       <Header title="Bebidas" />
       <ButtonDrinkCategories />
       {recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
-        <div key={ idDrink } data-testid={ `${index}-recipe-card` }>
+        <Link
+          to={ `/bebidas/${idDrink}` }
+          key={ idDrink }
+          data-testid={ `${index}-recipe-card` }
+        >
           <img
             src={ strDrinkThumb }
             alt={ strDrink }
             data-testid={ `${index}-card-img` }
           />
           <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
-        </div>
+        </Link>
       ))}
       <DrinkList />
       <MenuInferior />
