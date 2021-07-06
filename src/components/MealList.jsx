@@ -4,7 +4,12 @@ import '../Style/MealList.css';
 import FoodContext from '../context/FoodContext';
 
 function MealList() {
-  const { meals, fetchMeal, filterMeal, btnToggled } = useContext(FoodContext);
+  const {
+    meals,
+    fetchMeal,
+    filterMeal,
+    btnToggled,
+  } = useContext(FoodContext);
 
   useEffect(() => {
     fetchMeal();
@@ -17,7 +22,6 @@ function MealList() {
       </div>
     );
   }
-
   return (
     <div>
       <MealCard meals={ meals } />
