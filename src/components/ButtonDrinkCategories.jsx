@@ -41,6 +41,12 @@ function ButtonDrinkCategories() {
           </button>
         ))
       }
+      <button
+        type="button"
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
     </div>
   );
 }

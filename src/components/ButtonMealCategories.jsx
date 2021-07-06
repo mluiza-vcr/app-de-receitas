@@ -43,6 +43,12 @@ function ButtonMealCategories() {
           </Button>
         ))
       }
+      <button
+        type="button"
+        data-testid="All-category-filter"
+      >
+        All
+      </button>
     </div>
   );
 }
