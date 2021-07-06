@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 function MealCard({ meals }) {
   const maxLength = 12;
@@ -7,22 +8,24 @@ function MealCard({ meals }) {
     <div>
       {
         meals.slice(0, maxLength).map((meal, index) => (
-          <div
-            key={ index }
-            data-testid={ `${index}-recipe-card` }
-          >
-            <span
-              data-testid={ `${index}-card-name` }
+          <Link to={ `/comidas/${meal.idMeal}` } key={ index }>
+            <div
+              key={ index }
+              data-testid={ `${index}-recipe-card` }
             >
-              {meal.strMeal}
-            </span>
-            <img
-              src={ meal.strMealThumb }
-              alt="meal thumb"
-              data-testid={ `${index}-card-img` }
-              width="70"
-            />
-          </div>
+              <span
+                data-testid={ `${index}-card-name` }
+              >
+                {meal.strMeal}
+              </span>
+              <img
+                src={ meal.strMealThumb }
+                alt="meal thumb"
+                data-testid={ `${index}-card-img` }
+                width="70"
+              />
+            </div>
+          </Link>
         ))
       }
     </div>

@@ -89,6 +89,8 @@ function FoodProvider({ children }) {
         setBtnToggled,
         btnDrinkToggled,
         setBtnDrinkToggled,
+        btnMealAll,
+        setBtnMealAll,
       } }
     >
       {children}
