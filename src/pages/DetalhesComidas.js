@@ -1,6 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 
 function DetalhesComidas() {
+  const [recipes, setRecipes] = useState({});
+
+  const { location: { pathname } } = useHistory();
+  const splitPathName = pathname.split('/');
+  const idFood = splitPathName[2];
+
+  const fetchMealAPI = async () => {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idFood}`);
+    const recipe = await response.json();
+    setRecipes(recipe.meals[0]);
+  };
+
+  useEffect(() => {
+    fetchMealAPI();
+  }, []);
+
+  const { strMeal } = recipes;
+
   return (
     <div>
       <img data-testid="recipe-photo" src="" alt="" />
