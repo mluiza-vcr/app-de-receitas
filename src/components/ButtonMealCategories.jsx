@@ -46,6 +46,7 @@ function ButtonMealCategories() {
       <button
         type="button"
         data-testid="All-category-filter"
+        onClick={ () => setBtnToggled(false) }
       >
         All
       </button>

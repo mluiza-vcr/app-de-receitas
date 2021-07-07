@@ -44,6 +44,7 @@ function ButtonDrinkCategories() {
       <button
         type="button"
         data-testid="All-category-filter"
+        onClick={ () => setBtnDrinkToggled(false) }
       >
         All
       </button>
