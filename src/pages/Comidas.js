@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import myContext from '../context/myContext';
 import MealList from '../components/MealList';
-import SearchBarBtn from '../Components/SearchBarBtn';
 import ButtonMealCategories from '../components/ButtonMealCategories';
 import Header from '../Components/Header';
 import MenuInferior from '../Components/MenuInferior';
@@ -15,7 +14,6 @@ function Comidas() {
     <div>
       <div>
         <Header title="Comidas" />
-        <SearchBarBtn />
         <ButtonMealCategories />
         <MealList />
       </div>
