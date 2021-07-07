@@ -19,7 +19,6 @@ function Bebidas() {
       <Header title="Bebidas" />
       <ButtonDrinkCategories />
       <DrinkList />
-      {/* <DrinkHeaderCard /> */}
       {/* recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         <div key={ idDrink } data-testid={ `${index}-recipe-card` }>
           <img
