@@ -8,6 +8,7 @@ import MealList from '../components/MealList';
 import ButtonMealCategories from '../components/ButtonMealCategories';
 import Header from '../Components/Header';
 import MenuInferior from '../Components/MenuInferior';
+// import MealHeaderCard from '../components/MealHeaderCard';
 
 function Comidas() {
   // const { recipesFoods } = useContext(myContext);
@@ -18,12 +19,7 @@ function Comidas() {
       <Header title="Comidas" />
       <ButtonMealCategories />
       <MealList />
-      {/* foods.map(({ idMeal, strMeal, strMealThumb }, index) => (
-        <div key={ idMeal } data-testid={ `${index}-recipe-card` }>
-          <img src={ strMealThumb } alt={ strMeal } data-testid={ `${index}-card-img` } />
-          <p data-testid={ `${index}-card-name` }>{ strMeal }</p>
-        </div>
-      )) */}
+      {/* <MealHeaderCard /> */}
       <MenuInferior />
     </div>
   );

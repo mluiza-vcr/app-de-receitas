@@ -1,5 +1,5 @@
 import React from 'react';
-
+// import DrinkHeaderCard from '../components/DrinkHeaderCard';
 import DrinkList from '../components/DrinkList';
 // import myContext from '../context/myContext';
 
@@ -18,6 +18,8 @@ function Bebidas() {
     <div className="main-container">
       <Header title="Bebidas" />
       <ButtonDrinkCategories />
+      <DrinkList />
+      {/* <DrinkHeaderCard /> */}
       {/* recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         <div key={ idDrink } data-testid={ `${index}-recipe-card` }>
           <img
@@ -29,7 +31,6 @@ function Bebidas() {
 
         </div>
       )) */}
-      <DrinkList />
       <MenuInferior />
     </div>
   );
