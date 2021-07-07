@@ -22,9 +22,10 @@ function MealList() {
       </div>
     );
   }
+
   return (
     <div>
-      <MealCard meals={ meals } />
+      <MealCard className="teste" meals={ meals } />
     </div>
   );
 }
