@@ -1,140 +1,103 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { useRouteMatch, Redirect } from 'react-router';
-import { Button } from 'react-bootstrap';
-import { endpointFood, endpointDrink, fetchTudo } from '../services/Apis';
-import SearchContext from '../context/SearchContext';
-import '../Style/SearchBar.css';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import SearchDrinksAPI from '../services/SearchDrinksAPI';
+import SearchFoodsAPI from '../services/SearchFoodsAPI';
+import myContext from '../context/myContext';
 
 function SearchBar() {
-  const [apiResponse, setApiResponse] = useState([]);
-  const [apisKeys, setApisKeys] = useState('');
-  const [radioButtonName, setRadioButtonName] = useState('');
-  const { setFilterByText, filterByText } = useContext(SearchContext);
-  const { path } = useRouteMatch();
+  const [searchTerm, setSearchTerm] = useState('');
+  const [myChoice, setMyChoice] = useState('');
+  const history = useHistory();
 
-  const validateKeys = () => {
-    if (path === '/comidas') {
-      setApisKeys('meals');
+  const { setRecipesDrinks, setRecipesFoods } = useContext(myContext);
+
+  const clickSearchButton = async () => {
+    const { pathname } = history.location;
+    if (pathname === '/bebidas') {
+      const recipes = await SearchDrinksAPI(myChoice, searchTerm);
+      if (recipes === null) {
+        // eslint-disable-next-line no-alert
+        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        return;
+      }
+      if (recipes.length === 1) {
+        history.push(`/bebidas/${recipes[0].idDrink}`);
+      }
+      setRecipesDrinks(recipes);
     }
 
-    if (path === '/bebidas') {
-      setApisKeys('drinks');
-    }
-  };
-
-  useEffect(() => {
-    validateKeys();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const responseApi = async (endpoint) => {
-    const response = await fetchTudo(endpoint);
-    if (response[apisKeys].length === 0) {
-      // eslint-disable-next-line no-alert
-      window.alert('Sinto muito, não encontramos nenhuma receita para esses filtros');
-    }
-    return setApiResponse(response[apisKeys]);
-  };
-
-  const handleSubmit = () => {
-    if (filterByText.length > 1 && radioButtonName === 'firstLetter') {
-      // eslint-disable-next-line no-alert
-      window.alert('Sua busca deve conter somente 1 (um) caracter');
-    }
-
-    if (path === '/comidas') {
-      responseApi(endpointFood(filterByText)[radioButtonName]);
-    }
-
-    if (path === '/bebidas') {
-      responseApi(endpointDrink(filterByText)[radioButtonName]);
+    if (pathname === '/comidas') {
+      const recipes = await SearchFoodsAPI(myChoice, searchTerm);
+      if (recipes === null) {
+        // eslint-disable-next-line no-alert
+        alert('Sinto muito, não encontramos nenhuma receita para esses filtros.');
+        return;
+      }
+      if (recipes.length === 1) {
+        history.push(`/comidas/${recipes[0].idMeal}`);
+      }
+      setRecipesFoods(recipes);
     }
   };
 
-  const handleAPI = (title, image, id, alt) => {
-    if (apiResponse.length === 1) {
-      return <Redirect to={ `/${alt}/${apiResponse[0][id]}` } />;
-    }
-
-    const MAX_LENGHT_RECIPES = 12;
-    const foodsOrDrinks = apiResponse.slice(0, MAX_LENGHT_RECIPES);
-    return foodsOrDrinks.map((item, index) => (
-      <div
-        data-testid={ `${index}-recipe-card` }
-        key={ item[id] }
-      >
-        <h1 data-testid={ `${index}-card-name` }>{item[title]}</h1>
-        <img
-          data-testid={ `${index}-card-img` }
-          width="200"
-          src={ item[image] }
-          alt={ alt }
-        />
-      </div>
-    ));
-  };
-
-  const validateMap = () => {
-    if (path === '/comidas') {
-      return handleAPI('strMeal', 'strMealThumb', 'idMeal', 'comidas');
-    }
-
-    if (path === '/bebidas') {
-      return handleAPI('strDrink', 'strDrinkThumb', 'idDrink', 'bebidas');
-    }
+  const handleMyChoice = (event) => {
+    const { value } = event.target;
+    setMyChoice(value);
   };
 
   return (
-    <div className="searchBar">
-      <div className="radiosSearchBar">
+    <div>
+      <label htmlFor="search-input">
         <input
           type="text"
-          placeholder="Search Recipe"
+          id="search-input"
           data-testid="search-input"
-          className="text"
-          onChange={ (e) => setFilterByText(e.target.value) }
+          placeholder="digite aqui o termo da busca"
+          onChange={ (e) => setSearchTerm(e.target.value) }
         />
-        <label htmlFor="name">
-          Ingrediente
-          <input
-            type="radio"
-            name="Search"
-            data-testid="ingredient-search-radio"
-            className="radiosSearchBar"
-            onClick={ () => setRadioButtonName('ingredient') }
-          />
-        </label>
-        <label htmlFor="name">
-          Nome
-          <input
-            type="radio"
-            name="Search"
-            data-testid="name-search-radio"
-            className="radiosSearchBar"
-            onClick={ () => setRadioButtonName('name') }
-          />
-        </label>
-        <label htmlFor="firstLetter">
-          Primeira Letra
-          <input
-            type="radio"
-            name="Search"
-            label="Primeira Letra"
-            data-testid="first-letter-search-radio"
-            className="radiosSearchBar"
-            onClick={ () => setRadioButtonName('firstLetter') }
-          />
-        </label>
-
-      </div>
-      <Button
-        variant="outline-danger"
+      </label>
+      <br />
+      <label htmlFor="ingredient">
+        <input
+          type="radio"
+          name="search-term"
+          id="ingredient"
+          data-testid="ingredient-search-radio"
+          value="ingredient"
+          onChange={ handleMyChoice }
+        />
+        Ingredient
+      </label>
+      <label htmlFor="name">
+        <input
+          type="radio"
+          name="search-term"
+          id="name"
+          data-testid="name-search-radio"
+          value="name"
+          onChange={ handleMyChoice }
+        />
+        Name
+      </label>
+      <label htmlFor="first-letter">
+        <input
+          type="radio"
+          name="search-term"
+          id="first-letter"
+          data-testid="first-letter-search-radio"
+          value="first-letter"
+          onChange={ handleMyChoice }
+        />
+        First Letter
+      </label>
+      <br />
+      <button
+        type="button"
         data-testid="exec-search-btn"
-        onClick={ handleSubmit }
+        onClick={ clickSearchButton }
       >
-        Busca
-      </Button>
-      { validateMap() }
+        Search
+      </button>
     </div>
   );
 }
