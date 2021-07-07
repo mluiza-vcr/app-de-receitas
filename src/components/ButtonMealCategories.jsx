@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { Button } from 'react-bootstrap';
 import FoodContext from '../context/FoodContext';
 
 function ButtonMealCategories() {
@@ -17,6 +18,7 @@ function ButtonMealCategories() {
   useEffect(() => {
     fetchMealCategories(); // botões na tela
     fetchMealFilterByCategory(catchBtnFilter);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [0, catchBtnFilter]);
 
   function handleClick(e) {
@@ -27,17 +29,18 @@ function ButtonMealCategories() {
   }
 
   return (
-    <div>
+    <div className="btn-group">
       {
         mealCategories.slice(0, maxLength).map((category, index) => (
-          <button
+          <Button
+            className="btns"
             type="button"
             key={ index }
             data-testid={ `${category.strCategory}-category-filter` }
             onClick={ handleClick }
           >
             {category.strCategory}
-          </button>
+          </Button>
         ))
       }
       <button

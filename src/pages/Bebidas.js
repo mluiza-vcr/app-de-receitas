@@ -7,6 +7,7 @@ import ButtonDrinkCategories from '../components/ButtonDrinkCategories';
 
 import Header from '../Components/Header';
 import MenuInferior from '../Components/MenuInferior';
+import SearchBarBtn from '../Components/SearchBarBtn';
 // testsea
 
 function Bebidas() {
@@ -17,6 +18,7 @@ function Bebidas() {
   return (
     <div className="main-container">
       <Header title="Bebidas" />
+      <SearchBarBtn />
       <ButtonDrinkCategories />
       <DrinkList />
       {/* <DrinkHeaderCard /> */}
