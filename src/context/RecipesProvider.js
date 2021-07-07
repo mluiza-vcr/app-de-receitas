@@ -10,6 +10,7 @@ import fetchFoodAreaAPI from '../services/fetchFoodsAreaAPI';
 const RecipesProvider = ({ children }) => {
   // passar os states
   const [recipesFoods, setRecipesFoods] = useState([]);
+  const [auxRecipesFoods, setAuxRecipesFoods] = useState([]);
   const [recipesDrinks, setRecipesDrinks] = useState([]);
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
@@ -71,6 +72,8 @@ const RecipesProvider = ({ children }) => {
     foodAreas,
     foodCategories,
     drinkCategories,
+    auxRecipesFoods,
+    setAuxRecipesFoods,
   };
 
   // return

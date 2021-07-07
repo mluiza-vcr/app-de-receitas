@@ -11,9 +11,9 @@ import SearchBarBtn from '../Components/SearchBarBtn';
 // testsea
 
 function Bebidas() {
-//  const { recipesDrinks } = useContext(myContext);
-//  const MAX_LENGTH_RECIPES = 12;
-//  const recipes = recipesDrinks.slice(0, MAX_LENGTH_RECIPES);
+ const { recipesDrinks } = useContext(myContext);
+ const MAX_LENGTH_RECIPES = 12;
+ const recipes = recipesDrinks.slice(0, MAX_LENGTH_RECIPES);
 
   return (
     <div className="main-container">
@@ -22,7 +22,7 @@ function Bebidas() {
       <ButtonDrinkCategories />
       <DrinkList />
       {/* <DrinkHeaderCard /> */}
-      {/* recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
+      recipes.map(({ idDrink, strDrink, strDrinkThumb }, index) => (
         <div key={ idDrink } data-testid={ `${index}-recipe-card` }>
           <img
             src={ strDrinkThumb }
@@ -32,7 +32,7 @@ function Bebidas() {
           <p data-testid={ `${index}-card-name` }>{ strDrink }</p>
 
         </div>
-      )) */}
+      ))
       <MenuInferior />
     </div>
   );

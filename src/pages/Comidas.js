@@ -1,18 +1,17 @@
 import React from 'react';
-// import React, { useContext } from 'react';
 // import myContext from '../context/myContext';
 // import { Link } from 'react-router-dom';
-// import myContext from '../context/myContext';
 
 import MealList from '../components/MealList';
 import ButtonMealCategories from '../components/ButtonMealCategories';
 import Header from '../Components/Header';
 import MenuInferior from '../Components/MenuInferior';
 import SearchBarBtn from '../Components/SearchBarBtn';
+// import MealCard from '../components/MealCard';
 // import MealHeaderCard from '../components/MealHeaderCard';
 
 function Comidas() {
-  // const { recipesFoods } = useContext(myContext);
+  // const { auxRecipesFoods } = useContext(myContext);
   // const MAX_LENGTH_RECIPES = 12;
   // const foods = recipesFoods.slice(0, MAX_LENGTH_RECIPES);
   return (
@@ -21,7 +20,9 @@ function Comidas() {
       <SearchBarBtn />
       <ButtonMealCategories />
       <MealList />
-      {/* <MealHeaderCard /> */}
+      {/* {
+        auxRecipesFoods ? <MealList meals={ auxRecipesFoods } /> : <MealList />
+      } */}
       <MenuInferior />
     </div>
   );
