@@ -122,7 +122,9 @@ function DetalhesBebidas() {
         ))}
       </ul>
       <h3>Instruções</h3>
-      <p data-testid="instructions">{strInstructions}</p>
+      <section data-testid="instructions">
+        <p>{strInstructions}</p>
+      </section>
       <h3>Pratos que combinam com este drink</h3>
       <div className="recomentadion-container">
         {recomendation.map(({ strMealThumb, strMeal, strCategory }, index) => (

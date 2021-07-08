@@ -122,7 +122,9 @@ function DetalhesComidas() {
         ))}
       </ul>
       <h3>Instruções</h3>
-      <p data-testid="instructions">{strInstructions}</p>
+      <section data-testid="instructions">
+        <p>{strInstructions}</p>
+      </section>
       <h3>Vídeo</h3>
       <iframe
         data-testid="video"
@@ -138,8 +140,8 @@ function DetalhesComidas() {
             data-testid={ `${index}-recomendation-card` }
           >
             <img src={ strDrinkThumb } alt={ strDrink } />
-            <p>{ strAlcoholic }</p>
-            <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
+            <p>{strAlcoholic}</p>
+            <p data-testid={ `${index}-recomendation-title` }>{strDrink}</p>
           </div>
         ))}
       </div>
@@ -150,7 +152,7 @@ function DetalhesComidas() {
           data-testid="start-recipe-btn"
           onClick={ clickStartButton }
         >
-          { inProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+          { inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
         </button>
       )}
     </div>
