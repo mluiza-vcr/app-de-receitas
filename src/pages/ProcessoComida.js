@@ -1,6 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { useRouteMatch, useHistory } from 'react-router-dom';
-import myContext from '../context/myContext';
 
 function ProcessoComida() {
   const { url } = useRouteMatch();
@@ -9,6 +8,7 @@ function ProcessoComida() {
   const regex = /[\d+]/g;
 
   const idFood = url.match(regex).join('');
+  console.log(idFood);
 
   return (
     <div>
