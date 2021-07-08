@@ -10,15 +10,14 @@ import fetchFoodAreaAPI from '../services/fetchFoodsAreaAPI';
 const RecipesProvider = ({ children }) => {
   // passar os states
   const [recipesFoods, setRecipesFoods] = useState([]);
+  const [auxRecipesFoods, setAuxRecipesFoods] = useState([]);
   const [recipesDrinks, setRecipesDrinks] = useState([]);
+  const [auxRecipesDrinks, setAuxRecipesDrinks] = useState([]);
   const [foodIngredients, setFoodIngredients] = useState([]);
   const [drinkIngredients, setDrinkIngredients] = useState([]);
   const [foodAreas, setFoodAreas] = useState([]);
   const [foodCategories, setFoodCategories] = useState([]);
   const [drinkCategories, setDrinkCategories] = useState([]);
-  const [inProgress, setInProgress] = useState(false);
-  const [doneRecipe, setDoneRecipe] = useState([]);
-  const [ concatId, setConcatId ] = useState([]);
 
   // passar as funcoes
   useEffect(() => {
@@ -74,12 +73,10 @@ const RecipesProvider = ({ children }) => {
     foodAreas,
     foodCategories,
     drinkCategories,
-    inProgress,
-    setInProgress,
-    doneRecipe,
-    setDoneRecipe,
-    concatId,
-    setConcatId,
+    auxRecipesFoods,
+    setAuxRecipesFoods,
+    auxRecipesDrinks,
+    setAuxRecipesDrinks,
   };
 
   // return

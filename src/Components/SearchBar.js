@@ -9,8 +9,12 @@ function SearchBar() {
   const [myChoice, setMyChoice] = useState('');
   const history = useHistory();
 
-  const { setRecipesDrinks, setRecipesFoods } = useContext(myContext);
-
+  const {
+    setRecipesDrinks,
+    setRecipesFoods,
+    setAuxRecipesFoods,
+    setAuxRecipesDrinks,
+  } = useContext(myContext);
   const clickSearchButton = async () => {
     const { pathname } = history.location;
     if (pathname === '/bebidas') {
@@ -23,9 +27,11 @@ function SearchBar() {
       if (recipes.length === 1) {
         history.push(`/bebidas/${recipes[0].idDrink}`);
       }
+      setAuxRecipesDrinks(recipes);
+
+      //  console.log(recipes);
       setRecipesDrinks(recipes);
     }
-
     if (pathname === '/comidas') {
       const recipes = await SearchFoodsAPI(myChoice, searchTerm);
       if (recipes === null) {
@@ -35,7 +41,12 @@ function SearchBar() {
       }
       if (recipes.length === 1) {
         history.push(`/comidas/${recipes[0].idMeal}`);
+        return;
       }
+
+      setAuxRecipesFoods(recipes);
+
+      //  console.log(recipes);
       setRecipesFoods(recipes);
     }
   };

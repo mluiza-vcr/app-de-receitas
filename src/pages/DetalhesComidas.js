@@ -1,25 +1,26 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router';
-import getIngredientList from '../services/getIngredients';
-import myContext from '../context/myContext';
 import '../Style/PagesDetails.css';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import getIngredientList from '../services/getIngredients';
 
 function DetalhesComidas() {
   const [recipes, setRecipes] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [recomendation, setRecomendation] = useState([]);
-  const { inProgress, doneRecipe } = useContext(myContext);
+
   const [shareButton, setShareButton] = useState(false);
+  const [inProgress, setInProgress] = useState('');
+  const [done, setDone] = useState('');
   const [favorited, setFavorited] = useState('');
+
+  const history = useHistory();
 
   const { location: { pathname } } = useHistory();
   const splitPathName = pathname.split('/');
   const idFood = splitPathName[2];
-
-  const history = useHistory();
 
   const fetchMealAPI = async () => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${idFood}`);
@@ -38,7 +39,7 @@ function DetalhesComidas() {
   useEffect(() => {
     fetchMealAPI();
     fetchRecomendation();
-  }, [doneRecipe]);
+  }, []);
 
   useEffect(() => {
     setIngredients(getIngredientList(recipes));
@@ -60,16 +61,29 @@ function DetalhesComidas() {
     setShareButton(!shareButton);
   };
 
-  const checkDoneRecipe = () => {
-    if (doneRecipe.includes(idFood)) {
-      return true;
+  const checkInList = (myList, id) => myList.some((item) => item.id === id);
+
+  const checkDoneButton = () => {
+    const myDoneList = (JSON.parse(localStorage.getItem('doneRecipes'))
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : []);
+    setDone(checkInList(myDoneList, idFood));
+  };
+
+  const checkInProgress = () => {
+    const myProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
+    if (myProgress) {
+      setInProgress(Object.keys(myProgress.meals).includes(idFood));
     }
-    return false;
+  };
+
+  const clickStartButton = () => {
+    history.push(`/comidas/${idFood}/in-progress`);
   };
 
   useEffect(() => {
-    console.log(doneRecipe);
-  }, []);
+    checkDoneButton();
+    checkInProgress();
+  });
 
   return (
     <div>
@@ -124,20 +138,21 @@ function DetalhesComidas() {
             data-testid={ `${index}-recomendation-card` }
           >
             <img src={ strDrinkThumb } alt={ strDrink } />
-            <p>{strAlcoholic}</p>
-            <p data-testid={ `${index}-recomendation-title` }>{strDrink}</p>
+            <p>{ strAlcoholic }</p>
+            <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
           </div>
         ))}
       </div>
-      <button
-        className="details-button"
-        type="button"
-        data-testid="start-recipe-btn"
-        onClick={ () => history.push(`/comidas/${idFood}/in-progress`) }
-        disable={ checkDoneRecipe }
-      >
-        {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
-      </button>
+      {done ? null : (
+        <button
+          className="details-button"
+          type="button"
+          data-testid="start-recipe-btn"
+          onClick={ clickStartButton }
+        >
+          { inProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+        </button>
+      )}
     </div>
   );
 }

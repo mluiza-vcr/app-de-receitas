@@ -3,7 +3,6 @@ import { useRouteMatch, useHistory } from 'react-router-dom';
 import myContext from '../context/myContext';
 
 function ProcessoComida() {
-  const { setDoneRecipe, concatId, setConcatId } = useContext(myContext);
   const { url } = useRouteMatch();
   const history = useHistory();
 
@@ -11,20 +10,12 @@ function ProcessoComida() {
 
   const idFood = url.match(regex).join('');
 
-  const checkPath = () => {
-    setDoneRecipe(concatId);
-    history.push('/comidas');
-  };
-
   return (
     <div>
       <h2>Processo de comida</h2>
       <button
         type="button"
-        onClick={ () => {
-          checkPath();
-          console.log(concatId);
-        } }
+        onClick={ () => { history.push('/comidas'); } }
       >
         Finalizar Receita
       </button>
