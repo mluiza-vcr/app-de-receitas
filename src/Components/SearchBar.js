@@ -25,6 +25,7 @@ function SearchBar() {
         return;
       }
       if (recipes.length === 1) {
+        console.log(recipes);
         history.push(`/bebidas/${recipes[0].idDrink}`);
       }
       setAuxRecipesDrinks(recipes);
