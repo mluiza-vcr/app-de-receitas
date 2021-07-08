@@ -95,7 +95,6 @@ function FoodProvider({ children }) {
         setBtnToggled,
         btnDrinkToggled,
         setBtnDrinkToggled,
-
       } }
     >
       {children}

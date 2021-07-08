@@ -18,7 +18,8 @@ function DetalhesBebidas() {
   const fetchDrinksAPI = async () => {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`);
     const recipe = await response.json();
-    setRecipes(recipe.drinks[0]);
+    // condição para não quebrar o req 32 - bebidas
+    setRecipes((recipe && recipe.drinks && recipe.drinks[0]) ? recipe.drinks[0] : {});
   };
 
   const checkInList = (myList, id) => myList.some((item) => item.id === id);
