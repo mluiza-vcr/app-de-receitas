@@ -42,6 +42,7 @@ function SearchBar() {
       }
       if (recipes.length === 1) {
         history.push(`/comidas/${recipes[0].idMeal}`);
+        return;
       }
 
       setAuxRecipesFoods(recipes);
