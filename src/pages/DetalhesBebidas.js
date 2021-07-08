@@ -2,13 +2,20 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import '../Style/PagesDetails.css';
 import getIngredientList from '../services/getIngredients';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import shareIcon from '../images/shareIcon.svg';
 
 function DetalhesBebidas() {
   const [recipes, setRecipes] = useState({});
   const [ingredients, setIngredients] = useState([]);
+  const [recomendation, setRecomendation] = useState([]);
+
+  const [shareButton, setShareButton] = useState(false);
+  const [favorited, setFavorited] = useState('');
   const [inProgress, setInProgress] = useState('');
   const [done, setDone] = useState('');
-  const [recomendation, setRecomendation] = useState([]);
+
   const history = useHistory();
 
   const { location: { pathname } } = useHistory();
@@ -32,8 +39,17 @@ function DetalhesBebidas() {
   const checkInProgress = () => {
     const myProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (myProgress) {
-      setInProgress(Object.keys(myProgress.cocktails).includes(idDrink));
+      setInProgress(Object.keys(myProgress.drinks).includes(idDrink));
     }
+  };
+
+  const clickFavorite = () => {
+    setFavorited(!favorited);
+  };
+
+  const clickShare = () => {
+    navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
+    setShareButton(!shareButton);
   };
 
   const fetchRecomendation = async () => {
@@ -73,12 +89,30 @@ function DetalhesBebidas() {
     <div>
       <img data-testid="recipe-photo" width="350" src={ strDrinkThumb } alt="" />
       <h2 data-testid="recipe-title">{strDrink}</h2>
-      <button type="button" data-testid="share-btn">Share</button>
-      <button type="button" data-testid="favorite-btn">Favoritar</button>
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ clickShare }
+      >
+        <img src={ shareIcon } alt="share-button" />
+      </button>
+      {shareButton ? <span>Link copiado!</span> : null}
+      <button
+        type="button"
+        onClick={ clickFavorite }
+      >
+        <img
+          src={ favorited
+            ? blackHeartIcon
+            : whiteHeartIcon }
+          alt="favorite-button"
+          data-testid="favorite-btn"
+        />
+      </button>
       <p data-testid="recipe-category">{strAlcoholic}</p>
       <ul>
         <h1>Ingredientes</h1>
-        { ingredients.map(({ ingredient, amount }, index) => (
+        {ingredients.map(({ ingredient, amount }, index) => (
           <li
             key={ index }
             data-testid={ `${index}-ingredient-name-and-measure` }
@@ -87,7 +121,11 @@ function DetalhesBebidas() {
           </li>
         ))}
       </ul>
-      <p data-testid="instructions">{strInstructions}</p>
+      <h3>Instruções</h3>
+      <section data-testid="instructions">
+        <p>{strInstructions}</p>
+      </section>
+      <h3>Pratos que combinam com este drink</h3>
       <div className="recomentadion-container">
         {recomendation.map(({ strMealThumb, strMeal, strCategory }, index) => (
           <div
@@ -96,8 +134,8 @@ function DetalhesBebidas() {
             data-testid={ `${index}-recomendation-card` }
           >
             <img src={ strMealThumb } alt={ strMeal } />
-            <p>{ strCategory }</p>
-            <p data-testid={ `${index}-recomendation-title` }>{ strMeal }</p>
+            <p>{strCategory}</p>
+            <p data-testid={ `${index}-recomendation-title` }>{strMeal}</p>
           </div>
         ))}
       </div>
@@ -108,7 +146,7 @@ function DetalhesBebidas() {
           data-testid="start-recipe-btn"
           onClick={ clickStartButton }
         >
-          { inProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+          { inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
         </button>
       )}
     </div>
