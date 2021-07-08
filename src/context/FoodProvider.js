@@ -58,9 +58,15 @@ function FoodProvider({ children }) {
 
   async function fetchDrinkFilterByCategory(category) {
     setIsLoading(true);
-    const drinkByCategory = await getFilterDrinkCategory(category);
-    setFilterDrink(drinkByCategory);
-    setIsLoading(false);
+    mealCategories.forEach((mealCategory) => {
+      if (mealCategory.strCategory === category) {
+        setIsLoading(false);
+      }
+    });
+    if (category && !isLoading) {
+      const drinkByCategory = await getFilterDrinkCategory(category);
+      setFilterDrink(drinkByCategory);
+    }
   }
 
   return (
@@ -89,6 +95,7 @@ function FoodProvider({ children }) {
         setBtnToggled,
         btnDrinkToggled,
         setBtnDrinkToggled,
+
       } }
     >
       {children}
