@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import FoodContext from '../context/FoodContext';
+import myContext from '../context/myContext';
 
 function ButtonMealCategories() {
   const {
@@ -10,6 +11,8 @@ function ButtonMealCategories() {
     btnToggled,
     setBtnToggled,
   } = useContext(FoodContext);
+
+  const { setAuxRecipesFoods } = useContext(myContext);
 
   const [catchBtnFilter, setCatchBtnFilter] = useState('');
 
@@ -26,6 +29,7 @@ function ButtonMealCategories() {
     if (catchBtnFilter === e.target.innerText || !btnToggled) {
       setBtnToggled((initial) => !initial);
     }
+    setAuxRecipesFoods([]);
   }
 
   return (
@@ -44,6 +48,7 @@ function ButtonMealCategories() {
         ))
       }
       <button
+        className="btns"
         type="button"
         data-testid="All-category-filter"
         onClick={ () => setBtnToggled(false) }
