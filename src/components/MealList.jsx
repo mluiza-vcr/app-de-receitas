@@ -32,13 +32,12 @@ function MealList() {
       </div>
     );
   }
-  if (auxRecipesFoods.length === 0) {
-    return (
-      <div>
-        <MealCard className="teste" meals={ meals } />
-      </div>
-    );
-  }
+
+  return (
+    <div>
+      <MealCard className="teste" meals={ meals } />
+    </div>
+  );
 }
 
 export default MealList;

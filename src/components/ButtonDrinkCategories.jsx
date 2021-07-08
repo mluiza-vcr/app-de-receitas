@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import FoodContext from '../context/FoodContext';
+import myContext from '../context/myContext';
 import '../Style/BtnCategories.css';
 
 function ButtonDrinkCategories() {
@@ -12,6 +13,7 @@ function ButtonDrinkCategories() {
   } = useContext(FoodContext);
 
   const [catchBtnFilterDrink, setCatchBtnFilterDrink] = useState('');
+  const { setAuxRecipesDrinks } = useContext(myContext);
 
   const maxLength = 5;
 
@@ -26,6 +28,7 @@ function ButtonDrinkCategories() {
     if (catchBtnFilterDrink === e.target.innerText || !btnDrinkToggled) {
       setBtnDrinkToggled((initial) => !initial);
     }
+    setAuxRecipesDrinks([]);
   }
   return (
     <div>
