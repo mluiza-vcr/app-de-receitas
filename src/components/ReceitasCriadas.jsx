@@ -1,11 +1,6 @@
 import React from 'react';
 
 function ReceitasCriadas() {
-  function cardsRendered({cards}) {
-    cards.map((card, index) => {
-      const {}
-    });
-  }
   return (
     <div>
       <button
@@ -26,7 +21,6 @@ function ReceitasCriadas() {
       >
         Drink
       </button>
-      {cardsRendered()}
     </div>
 
   );
