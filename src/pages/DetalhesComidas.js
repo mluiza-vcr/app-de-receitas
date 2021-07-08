@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import '../Style/PagesDetails.css';
 import blackHeartIcon from '../images/blackHeartIcon.svg';

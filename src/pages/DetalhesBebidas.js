@@ -43,6 +43,10 @@ function DetalhesBebidas() {
     }
   };
 
+  const clickFavorite = () => {
+    setFavorited(!favorited);
+  };
+
   const clickShare = () => {
     navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
     setShareButton(!shareButton);
@@ -73,10 +77,6 @@ function DetalhesBebidas() {
   useEffect(() => {
     setIngredients(getIngredientList(recipes));
   }, [recipes]);
-
-  useEffect(() => {
-    setInProgress(Object.keys(myProgress.cocktails).includes(idDrink));
-  }, []);
 
   const {
     strDrinkThumb,
