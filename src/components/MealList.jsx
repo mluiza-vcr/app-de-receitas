@@ -35,7 +35,7 @@ function MealList() {
 
   return (
     <div>
-      <MealCard className="teste" meals={ meals } />
+      <MealCard meals={ meals } />
     </div>
   );
 }
