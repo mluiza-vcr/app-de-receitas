@@ -18,8 +18,6 @@ function ExplorarBebidas() {
     getRandomDrink();
   }, []);
 
-  console.log(idDrink);
-
   return (
     <div>
       <Header title="Explorar Bebidas" />
