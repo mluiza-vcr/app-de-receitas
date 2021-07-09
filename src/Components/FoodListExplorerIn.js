@@ -19,7 +19,8 @@ function FoodListExplorerIn() {
   console.log(ingredientsList);
   return (
     <div>
-      { ingredientsList.map((ingredient, index) => {
+      { (ingredientsList !== null
+      && ingredientsList.length > 0) && ingredientsList.map((ingredient, index) => {
         if (index <= maxNumber) {
           return (
             <FoodCardExplorerIn
@@ -29,6 +30,7 @@ function FoodListExplorerIn() {
             />
           );
         }
+        return null;
       }) }
     </div>
   );

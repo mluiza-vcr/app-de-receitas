@@ -15,6 +15,7 @@ function SearchBar() {
     setAuxRecipesFoods,
     setAuxRecipesDrinks,
   } = useContext(myContext);
+
   const clickSearchButton = async () => {
     const { pathname } = history.location;
     if (pathname === '/bebidas') {

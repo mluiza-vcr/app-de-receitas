@@ -8,7 +8,7 @@ function DrinkListExplorerIn() {
   const [id, setId] = useState('idIngredient');
   const [name, setName] = useState('strIngredient');
   const { location: { pathname } } = useHistory();
-  const maxNumberOfRecipes = 11;
+  const maxNumber = 11;
 
   useEffect(() => {
     const location = pathname.split('/')[2];
@@ -29,7 +29,7 @@ function DrinkListExplorerIn() {
     <div>
       { (ingredientsList !== null
       && ingredientsList.length > 0) && ingredientsList.map((ingredient, index) => {
-        if (index <= maxNumberOfRecipes) {
+        if (index <= maxNumber) {
           return (
             <DrinkCardExplorerIn
               key={ ingredient[id] }

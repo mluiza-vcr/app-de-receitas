@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { number, string } from 'prop-types';
+import { ingredientAPI } from '../services/SearchFoodsAPI';
+// import RecipesContext from '../context/RecipesProvider';
 
 function FoodCardExplorerIn({ name, index }) {
   const { location: { pathname } } = useHistory();
@@ -13,20 +15,29 @@ function FoodCardExplorerIn({ name, index }) {
         setThumbnail(`https://www.themealdb.com/images/ingredients/${name}-Small.png`);
       }
     }
+    // searchIngredients();
     checkingLocation();
+    console.log(ingredientAPI(name));
   }, [name, pathname, location]);
 
+  const clickToRecipe = () => {
+    ingredientAPI(name);
+  };
+  // Qnd clicar no card vai aparecer uma lista de receitas com aquele ingrediente
   return (
-    <div>
-      <div data-testid={ `${index}-ingredient-card` }>
-        <h2 data-testid={ `${index}-card-name` }>{name}</h2>
-        <img
-          src={ thumbnail }
-          alt={ `foto do ingrediente ${name}` }
-          data-testid={ `${index}-card-img` }
-        />
+    <Link to={ `/${name}` } onClick={ clickToRecipe }>
+      <div>
+        <div data-testid={ `${index}-ingredient-card` }>
+          <h2 data-testid={ `${index}-card-name` }>{name}</h2>
+          <img
+            src={ thumbnail }
+            alt={ `foto do ingrediente ${name}` }
+            data-testid={ `${index}-card-img` }
+          />
+        </div>
       </div>
-    </div>
+    </Link>
+
   );
 }
 
