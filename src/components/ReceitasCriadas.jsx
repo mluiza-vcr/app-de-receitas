@@ -41,9 +41,17 @@ function ReceitasCriadas() {
             alt="imagem horizontal"
             width="100"
           />
-          <p data-testid={ `${index}-horizontal-top-text` }>{readyRecipe.category}</p>
           <p data-testid={ `${index}-horizontal-name` }>{readyRecipe.name}</p>
-          <p>{readyRecipe.alcoholicOrNot}</p>
+          <p data-testid={ `${index}-horizontal-top-text` }>
+            {!readyRecipe.area || readyRecipe.area}
+            {' '}
+            -
+            {' '}
+            {readyRecipe.category}
+            {' '}
+            { !readyRecipe.alcoholicOrNot || readyRecipe.alcoholicOrNot }
+          </p>
+
           <p data-testid={ `${index}-horizontal-done-date` }>{readyRecipe.doneDate}</p>
 
           <button
@@ -57,13 +65,13 @@ function ReceitasCriadas() {
           </button>
 
           <p
-            data-testid={ `${index}-Pasta-horizontal-tag` }
+            data-testid={ `${index}-${readyRecipe.tags[0]}-horizontal-tag` }
             key={ index }
           >
             {readyRecipe.tags[0]}
           </p>
           <p
-            data-testid={ `${index}-Curry-horizontal-tag` }
+            data-testid={ `${index}-${readyRecipe.tags[1]}-horizontal-tag` }
             key={ index }
           >
             {readyRecipe.tags[1]}
