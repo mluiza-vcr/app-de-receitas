@@ -1,0 +1,21 @@
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 40px;
+  max-height: 100vh;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.explore-card {
+  background-color: rgb(255, 252, 235);
+  border-radius: 6px;
+  box-shadow: -3px 5px 5px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 225px;
+  margin: 8px;
+  width: 150px;
+}

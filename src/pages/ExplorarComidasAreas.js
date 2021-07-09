@@ -5,9 +5,10 @@ import MenuInferior from '../Components/MenuInferior';
 import { fetchFoodsAPI } from '../services/fetchFoodsAPI';
 import SearchBarBtn from '../Components/SearchBarBtn';
 import myContext from '../context/myContext';
+import '../Style/ExplorarComidasArea.css';
 
 function ExplorarComidasAreas() {
-  const { foodAreas, recipesFoods, setRecipeFoods } = useContext(myContext);
+  const { foodAreas, recipesFoods, setRecipesFoods } = useContext(myContext);
 
   const MAX_LENGTH = 12;
   const myRecipes = recipesFoods.slice(0, MAX_LENGTH);
@@ -15,14 +16,14 @@ function ExplorarComidasAreas() {
   const fetchRecipesByArea = async (area) => {
     const recipes = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${area}`)
       .then((data) => data.json());
-    setRecipeFoods(recipes.meals);
+    setRecipesFoods(recipes.meals);
   };
 
   const handleSetArea = async (event) => {
     const { value } = event.target;
     if (value === 'All') {
       const allRecipes = await fetchFoodsAPI();
-      setRecipeFoods(allRecipes);
+      setRecipesFoods(allRecipes);
       return;
     }
     fetchRecipesByArea(value);
@@ -54,9 +55,10 @@ function ExplorarComidasAreas() {
         ))}
       </select>
 
-      <div>
+      <div className="card-container">
         {myRecipes.map(({ idMeal, strMeal, strMealThumb }, index) => (
           <Link
+            className="explore-card"
             key={ idMeal }
             to={ `/comidas/${idMeal}` }
             data-testid={ `${index}-recipe-card` }
