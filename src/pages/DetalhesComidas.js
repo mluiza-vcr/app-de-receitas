@@ -10,6 +10,8 @@ function DetalhesComidas() {
   const [recipes, setRecipes] = useState({});
   const [ingredients, setIngredients] = useState([]);
   const [recomendation, setRecomendation] = useState([]);
+
+  const [shareButton, setShareButton] = useState(false);
   const [inProgress, setInProgress] = useState('');
   const [done, setDone] = useState('');
   const [favorited, setFavorited] = useState('');
@@ -54,6 +56,11 @@ function DetalhesComidas() {
     setFavorited(!favorited);
   };
 
+  const clickShare = () => {
+    navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
+    setShareButton(!shareButton);
+  };
+
   const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
   const checkDoneButton = () => {
@@ -85,9 +92,11 @@ function DetalhesComidas() {
       <button
         type="button"
         data-testid="share-btn"
+        onClick={ clickShare }
       >
         <img src={ shareIcon } alt="share-button" />
       </button>
+      {shareButton ? <span>Link copiado!</span> : null}
       <button
         type="button"
         onClick={ clickFavorite }
@@ -103,7 +112,7 @@ function DetalhesComidas() {
       <p data-testid="recipe-category">{strCategory}</p>
       <ul>
         <h1>Ingredientes</h1>
-        { ingredients.map(({ ingredient, amount }, index) => (
+        {ingredients.map(({ ingredient, amount }, index) => (
           <li
             key={ index }
             data-testid={ `${index}-ingredient-name-and-measure` }
@@ -112,12 +121,17 @@ function DetalhesComidas() {
           </li>
         ))}
       </ul>
-      <p data-testid="instructions">{strInstructions}</p>
+      <h3>Instruções</h3>
+      <section data-testid="instructions">
+        <p>{strInstructions}</p>
+      </section>
+      <h3>Vídeo</h3>
       <iframe
         data-testid="video"
         src={ `https://www.youtube.com/embed/${youTubeAdress[1]}` }
         title="video"
       />
+      <h3>Drinks que combinam com este prato</h3>
       <div className="recomentadion-container">
         {recomendation.map(({ strDrinkThumb, strDrink, strAlcoholic }, index) => (
           <div
@@ -126,8 +140,8 @@ function DetalhesComidas() {
             data-testid={ `${index}-recomendation-card` }
           >
             <img src={ strDrinkThumb } alt={ strDrink } />
-            <p>{ strAlcoholic }</p>
-            <p data-testid={ `${index}-recomendation-title` }>{ strDrink }</p>
+            <p>{strAlcoholic}</p>
+            <p data-testid={ `${index}-recomendation-title` }>{strDrink}</p>
           </div>
         ))}
       </div>
@@ -138,7 +152,7 @@ function DetalhesComidas() {
           data-testid="start-recipe-btn"
           onClick={ clickStartButton }
         >
-          { inProgress ? 'Continuar Receita' : 'Iniciar Receita' }
+          { inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
         </button>
       )}
     </div>

@@ -20,6 +20,8 @@ function FoodProvider({ children }) {
   const [filterDrink, setFilterDrink] = useState([]);
   const [btnToggled, setBtnToggled] = useState('');
   const [btnDrinkToggled, setBtnDrinkToggled] = useState('');
+  // para pegar a info salva no localStorage
+  const [readyRecipes, setReadyRecipes] = useState('');
 
   async function fetchMeal() {
     setIsLoading(true);
@@ -95,6 +97,8 @@ function FoodProvider({ children }) {
         setBtnToggled,
         btnDrinkToggled,
         setBtnDrinkToggled,
+        readyRecipes,
+        setReadyRecipes,
       } }
     >
       {children}
