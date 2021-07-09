@@ -1,4 +1,5 @@
 import React from 'react';
+import shareRecipe from '../images/shareIcon.svg';
 // import FoodContext from '../context/FoodContext';
 
 function ReceitasCriadas() {
@@ -42,12 +43,17 @@ function ReceitasCriadas() {
           />
           <p data-testid={ `${index}-horizontal-top-text` }>{readyRecipe.category}</p>
           <p data-testid={ `${index}-horizontal-name` }>{readyRecipe.name}</p>
+          <p>{readyRecipe.alcoholicOrNot}</p>
           <p data-testid={ `${index}-horizontal-done-date` }>{readyRecipe.doneDate}</p>
+
           <button
             type="button"
-            data-testid={ `${index}-horizontal-share-btn` }
           >
-            Share Recipe
+            <img
+              data-testid={ `${index}-horizontal-share-btn` }
+              src={ shareRecipe }
+              alt="btn-share"
+            />
           </button>
 
           <p
