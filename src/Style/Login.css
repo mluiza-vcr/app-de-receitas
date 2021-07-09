@@ -1,7 +1,13 @@
 .login-input {
   display: flex;
   justify-content: center;
-  margin-top: 60%;
+  margin-top: 10%;
+}
+
+@media (min-width: 600px) {
+  login-input {
+    margin-top: 60%;
+  }
 }
 
 .btn-color :disabled {
