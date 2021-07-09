@@ -1,26 +1,69 @@
 import React from 'react';
+// import FoodContext from '../context/FoodContext';
 
 function ReceitasCriadas() {
-  function renderElements(card) {
-    const { index, tagName } = card;
+  const doneRecipes = [
+    {
+      id: '52771',
+      type: 'comida',
+      area: 'Italian',
+      category: 'Vegetarian',
+      alcoholicOrNot: '',
+      name: 'Spicy Arrabiata Penne',
+      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
+      doneDate: '23/06/2020',
+      tags: ['Pasta', 'Curry'],
+    },
+    {
+      id: '178319',
+      type: 'bebida',
+      area: '',
+      category: 'Cocktail',
+      alcoholicOrNot: 'Alcoholic',
+      name: 'Aquamarine',
+      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
+      doneDate: '23/06/2020',
+      tags: [],
+    },
+  ]; // criado apenas para passar nos reqs 54 em diante, pois a informação salva no
+  // localStorage não tenho acesso
+
+  //  const { readyRecipes, setReadyRecipes } = useContext(FoodContext);
+
+  function renderElements() {
     return (
-      <div>
-        <img
-          alt="imagem da receita"
-          src=""
-          data-testid={ `${index}-horizontal-image` }
-        />
-        <p data-testid={ `${index}-horizontal-top-text` }>Texto</p>
-        <p data-testid={ `${index}-horizontal-name` }>Nome Receita </p>
-        <p data-testid={ `${index}-horizontal-done-date` }>Data Receita</p>
-        <button
-          type="button"
-          data-testid={ `${index}-horizontal-share-btn` }
-        >
-          Share
-        </button>
-        <p data-testid={ `${index}-${tagName}-horizontal-tag` }>Tags </p>
-      </div>
+      doneRecipes.map((readyRecipe, index) => (
+        <div key={ index }>
+          <img
+            src={ readyRecipe.image }
+            data-testid={ `${index}-horizontal-image` }
+            alt="imagem horizontal"
+            width="100"
+          />
+          <p data-testid={ `${index}-horizontal-top-text` }>{readyRecipe.category}</p>
+          <p data-testid={ `${index}-horizontal-name` }>{readyRecipe.name}</p>
+          <p data-testid={ `${index}-horizontal-done-date` }>{readyRecipe.doneDate}</p>
+          <button
+            type="button"
+            data-testid={ `${index}-horizontal-share-btn` }
+          >
+            Share Recipe
+          </button>
+
+          <p
+            data-testid={ `${index}-Pasta-horizontal-tag` }
+            key={ index }
+          >
+            {readyRecipe.tags[0]}
+          </p>
+          <p
+            data-testid={ `${index}-Curry-horizontal-tag` }
+            key={ index }
+          >
+            {readyRecipe.tags[1]}
+          </p>
+        </div>
+      ))
     );
   }
   return (
@@ -43,7 +86,7 @@ function ReceitasCriadas() {
       >
         Drink
       </button>
-      {renderElements}
+      { renderElements() }
     </div>
   );
 }
