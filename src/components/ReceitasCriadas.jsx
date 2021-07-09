@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import shareRecipe from '../images/shareIcon.svg';
 // import FoodContext from '../context/FoodContext';
 
@@ -28,20 +29,25 @@ function ReceitasCriadas() {
     },
   ]; // criado apenas para passar nos reqs 54 em diante, pois a informação salva no
   // localStorage não tenho acesso
+  // minha ideia é colocar essa info do localStorage dentro de readyRecipes
 
   //  const { readyRecipes, setReadyRecipes } = useContext(FoodContext);
+  const [shareButton, setShareButton] = useState(false);
 
   function renderElements() {
     return (
       doneRecipes.map((readyRecipe, index) => (
         <div key={ index }>
-          <img
-            src={ readyRecipe.image }
-            data-testid={ `${index}-horizontal-image` }
-            alt="imagem horizontal"
-            width="100"
-          />
-          <p data-testid={ `${index}-horizontal-name` }>{readyRecipe.name}</p>
+          <Link to={ `/${readyRecipe.type}s/${readyRecipe.id}` } key={ index }>
+            <img
+              src={ readyRecipe.image }
+              data-testid={ `${index}-horizontal-image` }
+              alt="imagem horizontal"
+              width="100"
+            />
+            <p data-testid={ `${index}-horizontal-name` }>{readyRecipe.name}</p>
+          </Link>
+
           <p data-testid={ `${index}-horizontal-top-text` }>
             {!readyRecipe.area || readyRecipe.area}
             {' '}
@@ -56,6 +62,10 @@ function ReceitasCriadas() {
 
           <button
             type="button"
+            onClick={ () => {
+              navigator.clipboard.writeText(`http://localhost:3000/${readyRecipe.type}s/${readyRecipe.id}`);
+              setShareButton(!shareButton);
+            } }
           >
             <img
               data-testid={ `${index}-horizontal-share-btn` }
@@ -63,6 +73,7 @@ function ReceitasCriadas() {
               alt="btn-share"
             />
           </button>
+          {shareButton ? <span>Link copiado!</span> : null}
 
           <p
             data-testid={ `${index}-${readyRecipe.tags[0]}-horizontal-tag` }
@@ -80,6 +91,13 @@ function ReceitasCriadas() {
       ))
     );
   }
+
+  function btnFood() {
+    doneRecipes.filter((readyRecipe) => (
+      readyRecipe.type === 'comida'
+    ));
+  }
+
   return (
     <div>
       <button
@@ -91,6 +109,7 @@ function ReceitasCriadas() {
       <button
         data-testid="filter-by-food-btn"
         type="button"
+        onClick={ btnFood }
       >
         Food
       </button>
