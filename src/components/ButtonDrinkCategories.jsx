@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import FoodContext from '../context/FoodContext';
 import myContext from '../context/myContext';
-import '../Style/BtnCategories.css';
+import '../Style/BtnCategoriesMain.css';
 
 function ButtonDrinkCategories() {
   const {
@@ -32,11 +32,11 @@ function ButtonDrinkCategories() {
     setAuxRecipesDrinks([]);
   }
   return (
-    <div className="btn-group">
+    <div className="btn-group-main">
       {
         drinkCategories.slice(0, maxLength).map((category, index) => (
           <Button
-            className="btns"
+            className="btns-main"
             type="button"
             key={ index }
             data-testid={ `${category.strCategory}-category-filter` }
@@ -47,7 +47,7 @@ function ButtonDrinkCategories() {
         ))
       }
       <button
-        className="btns"
+        className="btns-main"
         type="button"
         data-testid="All-category-filter"
         onClick={ () => setBtnDrinkToggled(false) }

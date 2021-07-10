@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function MealCard({ meals }) {
   const maxLength = 12;
-  // console.log(meals);
   return (
     <div className="meal-list-container">
       {

@@ -1,0 +1,17 @@
+.btn-group-main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-left: 5%;
+  margin-top: 20px;
+}
+
+.btns-main {
+  background-color: #EFCFE3;
+  border: 1px solid #E27396;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.404);
+  color: rgb(122, 100, 121);
+  margin-bottom: 8px;
+  margin-right: 25px;
+  width: 40vw;
+}
