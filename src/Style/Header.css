@@ -1,6 +1,21 @@
 .header-container {
   display: flex;
-  justify-content: space-around;
+  background-color: #ea9ab2;
+}
+
+.page-title {
+  margin-left: 40%;
+}
+
+@media (max-width: 500px) {
+  .page-title {
+    margin-left: 25%;
+  }
+}
+
+.img-profile {
+  margin-top: 17%;
+  margin-left: 30%;
 }
 
 /* .header-container {

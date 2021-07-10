@@ -1,16 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../Style/MealList.css';
 import { Link } from 'react-router-dom';
 
 function MealCard({ meals }) {
   const maxLength = 12;
   // console.log(meals);
   return (
-    <div>
+    <div className="meal-list-container">
       {
         meals.slice(0, maxLength).map((meal, index) => (
           <Link to={ `/comidas/${meal.idMeal}` } key={ index }>
             <div
+              className="meal-card"
               key={ index }
               data-testid={ `${index}-recipe-card` }
             >
@@ -23,7 +25,6 @@ function MealCard({ meals }) {
                 src={ meal.strMealThumb }
                 alt="meal thumb"
                 data-testid={ `${index}-card-img` }
-                width="40"
               />
             </div>
           </Link>

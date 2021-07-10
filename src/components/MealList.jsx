@@ -1,6 +1,5 @@
 import React, { useContext, useEffect } from 'react';
 import MealCard from './MealCard';
-import '../Style/MealList.css';
 import FoodContext from '../context/FoodContext';
 import RecipesContext from '../context/myContext';
 
@@ -21,14 +20,14 @@ function MealList() {
   if (filterMeal && btnToggled) {
     return (
       <div>
-        <MealCard className="meal-card" meals={ filterMeal } />
+        <MealCard meals={ filterMeal } />
       </div>
     );
   }
   if (auxRecipesFoods.length > 0) {
     return (
       <div>
-        <MealCard className="meal-card" meals={ auxRecipesFoods } />
+        <MealCard meals={ auxRecipesFoods } />
       </div>
     );
   }
