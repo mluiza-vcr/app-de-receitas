@@ -7,7 +7,7 @@
   margin-left: 40%;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
   .page-title {
     margin-left: 25%;
   }
@@ -17,28 +17,3 @@
   margin-top: 17%;
   margin-left: 30%;
 }
-
-/* .header-container {
-  align-items: stretch;
-  justify-content: space-between;
-  background-color: #ea9ab2;
-  display: flex;
-  height: 8vh;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  width: 100vh;
-}
-
-h2 {
-  display: flex;
-  margin-right: 20%;
-}
-
-button {
-  background-color: transparent;
-  border: none;
-}
-
-img {
-  height: 7vh;
-} */

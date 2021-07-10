@@ -26,4 +26,5 @@
 
 .meal-card > span {
   color: rgb(122, 100, 121);
+  overflow-x: hidden;
 }

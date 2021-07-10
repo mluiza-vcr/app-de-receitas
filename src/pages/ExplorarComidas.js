@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import Header from '../Components/Header';
+import '../Style/PageExplore.css';
 import MenuInferior from '../Components/MenuInferior';
 
 function ExplorarComidas() {
@@ -21,27 +22,32 @@ function ExplorarComidas() {
   return (
     <div>
       <Header title="Explorar Comidas" />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => history.push('/explorar/comidas/ingredientes') }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-by-area"
-        onClick={ () => history.push('/explorar/comidas/area') }
-      >
-        Por Local de Origem
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => history.push(`/comidas/${idMeal}`) }
-      >
-        Me Surpreenda!
-      </button>
+      <div className="btn-group">
+        <button
+          className="btns"
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => history.push('/explorar/comidas/ingredientes') }
+        >
+          Por Ingredientes
+        </button>
+        <button
+          className="btns"
+          type="button"
+          data-testid="explore-by-area"
+          onClick={ () => history.push('/explorar/comidas/area') }
+        >
+          Por Local de Origem
+        </button>
+        <button
+          className="btns"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ () => history.push(`/comidas/${idMeal}`) }
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <MenuInferior />
     </div>
   );
