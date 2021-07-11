@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import Header from '../Components/Header';
+import Header from '../components/Header';
 import '../Style/PageExplore.css';
-import MenuInferior from '../Components/MenuInferior';
+import MenuInferior from '../components/MenuInferior';
 
 function ExplorarBebidas() {
   const [idDrink, setIdDrink] = useState('');

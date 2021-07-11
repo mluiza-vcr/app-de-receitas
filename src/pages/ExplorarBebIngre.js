@@ -1,7 +1,7 @@
 import React from 'react';
-import DrinkListExplorerIn from '../Components/DrinkListExplorerIn';
-import Header from '../Components/Header';
-import MenuInferior from '../Components/MenuInferior';
+import DrinkListExplorerIn from '../components/DrinkListExplorerIn';
+import Header from '../components/Header';
+import MenuInferior from '../components/MenuInferior';
 
 function ExplorarBebIngre() {
   return (
