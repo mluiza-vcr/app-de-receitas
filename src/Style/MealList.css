@@ -1,4 +1,30 @@
-.meal-card {
+.meal-list-container {
   display: flex;
   flex-wrap: wrap;
+}
+
+.meal-card {
+  align-items: center;
+  background-color: #EFCFE3;
+  border-radius: 6px;
+  box-shadow: -3px 5px 5px rgba(0, 0, 0, 0.45);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  height: 170px;
+  justify-content: space-between;
+  margin: 5px;
+  width: 170px;
+}
+
+.meal-card > img {
+  border-radius: 6px 6px 0 0;
+  height: 140px;
+  object-fit: cover;
+  width: 170px;
+}
+
+.meal-card > span {
+  color: rgb(122, 100, 121);
+  overflow-x: hidden;
 }

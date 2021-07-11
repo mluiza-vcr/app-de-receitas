@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { string } from 'prop-types';
 import SearchBar from './SearchBar';
+import '../Style/SearchBarBtn.css';
 import imgSearch from '../images/searchIcon.svg';
 import '../Style/Header.css';
 
@@ -15,7 +16,7 @@ function SearchBarBtn({ title }) {
   };
   return (
     <div>
-      <button type="button" onClick={ HandleSearch }>
+      <button className="button-search" type="button" onClick={ HandleSearch }>
         <img src={ imgSearch } alt="Search" data-testid="search-top-btn" />
       </button>
       { searchBar && <SearchBar title={ title } /> }

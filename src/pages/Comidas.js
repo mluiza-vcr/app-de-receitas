@@ -2,9 +2,10 @@ import React from 'react';
 
 import MealList from '../components/MealList';
 import ButtonMealCategories from '../components/ButtonMealCategories';
-import Header from '../Components/Header';
-import MenuInferior from '../Components/MenuInferior';
-import SearchBarBtn from '../Components/SearchBarBtn';
+import Header from '../components/Header';
+import '../Style/BtnCategories.css';
+import MenuInferior from '../components/MenuInferior';
+import SearchBarBtn from '../components/SearchBarBtn';
 
 function Comidas() {
   return (

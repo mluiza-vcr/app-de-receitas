@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Components/Header';
-import MenuInferior from '../Components/MenuInferior';
+import Header from '../components/Header';
+import MenuInferior from '../components/MenuInferior';
 import { fetchFoodsAPI } from '../services/fetchFoodsAPI';
-import SearchBarBtn from '../Components/SearchBarBtn';
+import SearchBarBtn from '../components/SearchBarBtn';
 import myContext from '../context/myContext';
 import '../Style/ExplorarComidasArea.css';
 

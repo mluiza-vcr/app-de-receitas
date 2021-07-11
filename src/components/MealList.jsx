@@ -21,14 +21,14 @@ function MealList() {
   if (filterMeal && btnToggled) {
     return (
       <div>
-        <MealCard className="meal-card" meals={ filterMeal } />
+        <MealCard meals={ filterMeal } />
       </div>
     );
   }
   if (auxRecipesFoods.length > 0) {
     return (
       <div>
-        <MealCard className="meal-card" meals={ auxRecipesFoods } />
+        <MealCard meals={ auxRecipesFoods } />
       </div>
     );
   }
