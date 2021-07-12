@@ -4,6 +4,7 @@ import '../Style/PagesDetails.css';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import localStorageInitialState from '../services/LocalStorage';
 import getIngredientList from '../services/getIngredients';
 
 function DetalhesComidas() {
@@ -36,32 +37,45 @@ function DetalhesComidas() {
     setRecomendation(recommend.slice(0, MAX_RECOMENDATION));
   };
 
-  useEffect(() => {
-    fetchMealAPI();
-    fetchRecomendation();
-  }, []);
+  const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
-  useEffect(() => {
-    setIngredients(getIngredientList(recipes));
-  }, [recipes]);
+  const checkFavoriteButton = () => {
+    const myStorageFavorite = (JSON.parse(localStorage.getItem('favoriteRecipes'))
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
+    setFavorited(checkInList(myStorageFavorite, idFood));
+  };
 
-  const { strMealThumb, strMeal, strCategory, strYoutube, strInstructions } = recipes;
+  const localStorageSave = () => {
+    const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipes;
+    const myFavorite = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    };
 
-  let youTubeAdress = '';
-  if (strYoutube) {
-    youTubeAdress = strYoutube.split('=');
-  }
+    const myStorageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (checkInList(myStorageFavorite, idMeal)) {
+      const newList = myStorageFavorite.filter((item) => item.id !== idMeal);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
+    } else {
+      myStorageFavorite.push(myFavorite);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(myStorageFavorite));
+    }
+  };
 
   const clickFavorite = () => {
     setFavorited(!favorited);
+    localStorageSave();
   };
 
   const clickShare = () => {
     navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
     setShareButton(!shareButton);
   };
-
-  const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
   const checkDoneButton = () => {
     const myDoneList = (JSON.parse(localStorage.getItem('doneRecipes'))
@@ -80,9 +94,30 @@ function DetalhesComidas() {
     history.push(`/comidas/${idFood}/in-progress`);
   };
 
+  const { strMealThumb, strMeal, strCategory, strYoutube, strInstructions } = recipes;
+
+  let youTubeAdress = '';
+  if (strYoutube) {
+    youTubeAdress = strYoutube.split('=');
+  }
+
+  useEffect(() => {
+    localStorageInitialState();
+  }, []);
+
+  useEffect(() => {
+    fetchMealAPI();
+    fetchRecomendation();
+  }, []);
+
+  useEffect(() => {
+    setIngredients(getIngredientList(recipes));
+  }, [recipes]);
+
   useEffect(() => {
     checkDoneButton();
     checkInProgress();
+    checkFavoriteButton();
   });
 
   return (

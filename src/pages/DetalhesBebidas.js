@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
 import '../Style/PagesDetails.css';
 import getIngredientList from '../services/getIngredients';
+import initialStatesForLocalStorage from '../services/LocalStorage';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
@@ -20,32 +21,62 @@ function DetalhesBebidas() {
 
   const { location: { pathname } } = useHistory();
   const splitPathName = pathname.split('/');
-  const idDrink = splitPathName[2];
+  const drinkId = splitPathName[2];
 
   const fetchDrinksAPI = async () => {
-    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${idDrink}`);
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${drinkId}`);
     const recipe = await response.json();
-    // condição para não quebrar o req 32 - bebidas
-    setRecipes((recipe && recipe.drinks && recipe.drinks[0]) ? recipe.drinks[0] : {});
+    setRecipes(recipe.drinks[0]);
   };
 
   const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
+  const checkFavoriteButton = () => {
+    const myStorageFavorite = (JSON.parse(localStorage.getItem('favoriteRecipes'))
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
+    setFavorited(checkInList(myStorageFavorite, drinkId));
+  };
+
   const checkDoneButton = () => {
     const myDoneList = (JSON.parse(localStorage.getItem('doneRecipes'))
       ? JSON.parse(localStorage.getItem('doneRecipes')) : []);
-    setDone(checkInList(myDoneList, idDrink));
+    setDone(checkInList(myDoneList, drinkId));
   };
 
   const checkInProgress = () => {
     const myProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (myProgress) {
-      setInProgress(Object.keys(myProgress.cocktails).includes(idDrink));
+      setInProgress(Object.keys(myProgress.cocktails).includes(drinkId));
+    }
+  };
+
+  const localStorageSave = () => {
+    const { idDrink, strCategory, strAlcoholic, strDrink, strDrinkThumb } = recipes;
+
+    const myFavorite = {
+      id: idDrink,
+      type: 'bebida',
+      area: '',
+      category: strCategory,
+      alcoholicOrNot: strAlcoholic,
+      name: strDrink,
+      image: strDrinkThumb,
+    };
+
+    const myStorageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+
+    if (checkInList(myStorageFavorite, idDrink)) {
+      const newList = myStorageFavorite.filter((item) => item.id !== idDrink);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
+    } else {
+      myStorageFavorite.push(myFavorite);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(myStorageFavorite));
     }
   };
 
   const clickFavorite = () => {
     setFavorited(!favorited);
+    localStorageSave();
   };
 
   const clickShare = () => {
@@ -62,8 +93,12 @@ function DetalhesBebidas() {
   };
 
   const clickStartButton = () => {
-    history.push(`/bebidas/${idDrink}/in-progress`);
+    history.push(`/bebidas/${drinkId}/in-progress`);
   };
+
+  useEffect(() => {
+    initialStatesForLocalStorage();
+  }, []);
 
   useEffect(() => {
     fetchDrinksAPI();
@@ -73,6 +108,7 @@ function DetalhesBebidas() {
   useEffect(() => {
     checkDoneButton();
     checkInProgress();
+    checkFavoriteButton();
   });
 
   useEffect(() => {
