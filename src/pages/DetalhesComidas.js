@@ -4,6 +4,7 @@ import '../Style/PagesDetails.css';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
+import localStorageInitialState from '../services/LocalStorage';
 import getIngredientList from '../services/getIngredients';
 
 function DetalhesComidas() {
@@ -36,27 +37,16 @@ function DetalhesComidas() {
     setRecomendation(recommend.slice(0, MAX_RECOMENDATION));
   };
 
-  useEffect(() => {
-    fetchMealAPI();
-    fetchRecomendation();
-  }, []);
-
-  useEffect(() => {
-    setIngredients(getIngredientList(recipes));
-  }, [recipes]);
-
-  const { strMealThumb, strMeal, strCategory, strYoutube, strInstructions } = recipes;
-
-  let youTubeAdress = '';
-  if (strYoutube) {
-    youTubeAdress = strYoutube.split('=');
-  }
-
   const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
-  const saveFavorite = () => {
-    const { idMeal, strArea } = recipes;
+  const checkFavoriteButton = () => {
+    const myStorageFavorite = (JSON.parse(localStorage.getItem('favoriteRecipes'))
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : []);
+    setFavorited(checkInList(myStorageFavorite, idFood));
+  };
 
+  const localStorageSave = () => {
+    const { idMeal, strArea, strCategory, strMeal, strMealThumb } = recipes;
     const myFavorite = {
       id: idMeal,
       type: 'comida',
@@ -67,19 +57,19 @@ function DetalhesComidas() {
       image: strMealThumb,
     };
 
-    const getFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
-    if (getFavorite && checkInList(getFavorite, idMeal)) {
-      const newList = getFavorite.filter((item) => item.id !== idMeal);
+    const myStorageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (checkInList(myStorageFavorite, idMeal)) {
+      const newList = myStorageFavorite.filter((item) => item.id !== idMeal);
       localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
     } else {
-      localStorage.setItem('favoriteRecipes', JSON.stringify(myFavorite));
-      getFavorite.concat(myFavorite);
+      myStorageFavorite.push(myFavorite);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(myStorageFavorite));
     }
   };
 
   const clickFavorite = () => {
     setFavorited(!favorited);
-    saveFavorite();
+    localStorageSave();
   };
 
   const clickShare = () => {
@@ -104,10 +94,30 @@ function DetalhesComidas() {
     history.push(`/comidas/${idFood}/in-progress`);
   };
 
+  const { strMealThumb, strMeal, strCategory, strYoutube, strInstructions } = recipes;
+
+  let youTubeAdress = '';
+  if (strYoutube) {
+    youTubeAdress = strYoutube.split('=');
+  }
+
+  useEffect(() => {
+    localStorageInitialState();
+  }, []);
+
+  useEffect(() => {
+    fetchMealAPI();
+    fetchRecomendation();
+  }, []);
+
+  useEffect(() => {
+    setIngredients(getIngredientList(recipes));
+  }, [recipes]);
+
   useEffect(() => {
     checkDoneButton();
     checkInProgress();
-    verifyFavoriteStorage();
+    checkFavoriteButton();
   });
 
   return (
