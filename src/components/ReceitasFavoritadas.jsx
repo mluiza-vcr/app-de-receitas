@@ -5,37 +5,21 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareRecipe from '../images/shareIcon.svg';
 
 function ReceitasFavoritadas() {
-  const favoriteRecipes = [
-    {
-      id: '52771',
-      type: 'comida',
-      area: 'Italian',
-      category: 'Vegetarian',
-      alcoholicOrNot: '',
-      name: 'Spicy Arrabiata Penne',
-      image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    },
-    {
-      id: '178319',
-      type: 'bebida',
-      area: '',
-      category: 'Cocktail',
-      alcoholicOrNot: 'Alcoholic',
-      name: 'Aquamarine',
-      image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    },
-  ];
+  const myStorageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
 
   const [shareButton, setShareButton] = useState(false);
   const [favorited, setFavorited] = useState('');
+  const [favoriteRecipe, setFavoriteRecipe] = useState(myStorageFavorite);
 
   const clickFavorite = () => {
+    //  localStorage('favoriteRecipes', JSON.stringify());
+
     setFavorited(!favorited);
   };
 
   function renderElements() {
     return (
-      favoriteRecipes.map((favRecipe, index) => (
+      favoriteRecipe.map((favRecipe, index) => (
         <div key={ index }>
           <Link to={ `/${favRecipe.type}s/${favRecipe.id}` } key={ index }>
             <img
@@ -90,24 +74,43 @@ function ReceitasFavoritadas() {
     );
   }
 
+  function btnFood() {
+    const filteredMeal = myStorageFavorite
+      .filter((favRecipe) => favRecipe.type === 'comida');
+    setFavoriteRecipe(filteredMeal);
+  }
+
+  function btnDrink() {
+    const filteredDrink = myStorageFavorite
+      .filter((favRecipe) => favRecipe.type === 'bebida');
+    setFavoriteRecipe(filteredDrink);
+  }
+
+  function btnAll() {
+    setFavoriteRecipe(myStorageFavorite);
+  }
+
   return (
 
     <div>
       <button
         data-testid="filter-by-all-btn"
         type="button"
+        onClick={ btnAll }
       >
         All
       </button>
       <button
         data-testid="filter-by-food-btn"
         type="button"
+        onClick={ btnFood }
       >
         Food
       </button>
       <button
         data-testid="filter-by-drink-btn"
         type="button"
+        onClick={ btnDrink }
       >
         Drink
       </button>

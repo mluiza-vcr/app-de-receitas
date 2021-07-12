@@ -31,12 +31,12 @@ function ReceitasCriadas() {
   // localStorage não tenho acesso
   // minha ideia é colocar essa info do localStorage dentro de readyRecipes
 
-  //  const { readyRecipes, setReadyRecipes } = useContext(FoodContext);
+  const [readyRecipes, setReadyRecipes] = useState(doneRecipes);
   const [shareButton, setShareButton] = useState(false);
 
   function renderElements() {
     return (
-      doneRecipes.map((readyRecipe, index) => (
+      readyRecipes.map((readyRecipe, index) => (
         <div key={ index }>
           <Link to={ `/${readyRecipe.type}s/${readyRecipe.id}` } key={ index }>
             <img
@@ -93,9 +93,19 @@ function ReceitasCriadas() {
   }
 
   function btnFood() {
-    doneRecipes.filter((readyRecipe) => (
-      readyRecipe.type === 'comida'
-    ));
+    const filteredMeal = doneRecipes
+      .filter((favRecipe) => favRecipe.type === 'comida');
+    setReadyRecipes(filteredMeal);
+  }
+
+  function btnDrink() {
+    const filteredDrink = doneRecipes
+      .filter((favRecipe) => favRecipe.type === 'bebida');
+    setReadyRecipes(filteredDrink);
+  }
+
+  function btnAll() {
+    setReadyRecipes(doneRecipes);
   }
 
   return (
@@ -103,6 +113,7 @@ function ReceitasCriadas() {
       <button
         data-testid="filter-by-all-btn"
         type="button"
+        onClick={ btnAll }
       >
         All
       </button>
@@ -116,6 +127,7 @@ function ReceitasCriadas() {
       <button
         data-testid="filter-by-drink-btn"
         type="button"
+        onClick={ btnDrink }
       >
         Drink
       </button>
