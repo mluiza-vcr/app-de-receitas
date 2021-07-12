@@ -52,16 +52,40 @@ function DetalhesComidas() {
     youTubeAdress = strYoutube.split('=');
   }
 
+  const checkInList = (myList, id) => myList.some((item) => item.id === id);
+
+  const saveFavorite = () => {
+    const { idMeal, strArea } = recipes;
+
+    const myFavorite = {
+      id: idMeal,
+      type: 'comida',
+      area: strArea,
+      category: strCategory,
+      alcoholicOrNot: '',
+      name: strMeal,
+      image: strMealThumb,
+    };
+
+    const getFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
+    if (getFavorite && checkInList(getFavorite, idMeal)) {
+      const newList = getFavorite.filter((item) => item.id !== idMeal);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
+    } else {
+      localStorage.setItem('favoriteRecipes', JSON.stringify(myFavorite));
+      getFavorite.concat(myFavorite);
+    }
+  };
+
   const clickFavorite = () => {
     setFavorited(!favorited);
+    saveFavorite();
   };
 
   const clickShare = () => {
     navigator.clipboard.writeText(`http://localhost:3000${pathname}`);
     setShareButton(!shareButton);
   };
-
-  const checkInList = (myList, id) => myList.some((item) => item.id === id);
 
   const checkDoneButton = () => {
     const myDoneList = (JSON.parse(localStorage.getItem('doneRecipes'))
@@ -83,6 +107,7 @@ function DetalhesComidas() {
   useEffect(() => {
     checkDoneButton();
     checkInProgress();
+    verifyFavoriteStorage();
   });
 
   return (
