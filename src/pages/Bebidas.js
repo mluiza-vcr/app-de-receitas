@@ -3,9 +3,9 @@ import DrinkList from '../components/DrinkList';
 
 import ButtonDrinkCategories from '../components/ButtonDrinkCategories';
 
-import Header from '../Components/Header';
-import MenuInferior from '../Components/MenuInferior';
-import SearchBarBtn from '../Components/SearchBarBtn';
+import Header from '../components/Header';
+import MenuInferior from '../components/MenuInferior';
+import SearchBarBtn from '../components/SearchBarBtn';
 
 function Bebidas() {
   return (

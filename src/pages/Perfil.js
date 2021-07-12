@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router';
-import MenuInferior from '../Components/MenuInferior';
-import Header from '../Components/Header';
+import MenuInferior from '../components/MenuInferior';
+import Header from '../components/Header';
 import '../Style/Perfil.css';
 
 function Perfil() {

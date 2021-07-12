@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router';
-import Header from '../Components/Header';
-import MenuInferior from '../Components/MenuInferior';
+import Header from '../components/Header';
+import '../Style/PageExplore.css';
+import MenuInferior from '../components/MenuInferior';
 
 function ExplorarBebidas() {
   const [idDrink, setIdDrink] = useState('');
@@ -21,20 +22,24 @@ function ExplorarBebidas() {
   return (
     <div>
       <Header title="Explorar Bebidas" />
-      <button
-        type="button"
-        data-testid="explore-by-ingredient"
-        onClick={ () => history.push('/explorar/bebidas/ingredientes') }
-      >
-        Por Ingredientes
-      </button>
-      <button
-        type="button"
-        data-testid="explore-surprise"
-        onClick={ () => history.push(`/bebidas/${idDrink}`) }
-      >
-        Me Surpreenda!
-      </button>
+      <div className="btn-group">
+        <button
+          className="btns"
+          type="button"
+          data-testid="explore-by-ingredient"
+          onClick={ () => history.push('/explorar/bebidas/ingredientes') }
+        >
+          Por Ingredientes
+        </button>
+        <button
+          className="btns"
+          type="button"
+          data-testid="explore-surprise"
+          onClick={ () => history.push(`/bebidas/${idDrink}`) }
+        >
+          Me Surpreenda!
+        </button>
+      </div>
       <MenuInferior />
     </div>
   );

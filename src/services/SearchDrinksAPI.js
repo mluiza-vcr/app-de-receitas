@@ -1,4 +1,4 @@
-const ingredientAPI = async (term) => {
+export const ingredientAPI = async (term) => {
   const myRecipes = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${term}`)
     .then((response) => response.json())
     .then((myDrinks) => myDrinks.drinks);
@@ -31,6 +31,7 @@ const SearchDrinksAPI = async (type, term) => {
       return firstLetterAPI(term);
     }
     if (term.length > 1) {
+      // eslint-disable-next-line no-alert
       alert('Sua busca deve conter somente 1 (um) caracter');
       return [];
     }

@@ -1,7 +1,7 @@
 import React from 'react';
-import FoodListExplorerIn from '../Components/FoodListExplorerIn';
-import Header from '../Components/Header';
-import MenuInferior from '../Components/MenuInferior';
+import FoodListExplorerIn from '../components/FoodListExplorerIn';
+import Header from '../components/Header';
+import MenuInferior from '../components/MenuInferior';
 
 function ExplorarComIngre() {
   return (

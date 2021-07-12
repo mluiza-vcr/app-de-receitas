@@ -40,7 +40,7 @@ function DetalhesBebidas() {
   const checkInProgress = () => {
     const myProgress = JSON.parse(localStorage.getItem('inProgressRecipes'));
     if (myProgress) {
-      setInProgress(Object.keys(myProgress.drinks).includes(idDrink));
+      setInProgress(Object.keys(myProgress.cocktails).includes(idDrink));
     }
   };
 
