@@ -16,6 +16,7 @@ function MealList() {
 
   useEffect(() => {
     fetchMeal();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (filterMeal && btnToggled) {

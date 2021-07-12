@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { number, string } from 'prop-types';
 import { ingredientAPI } from '../services/SearchFoodsAPI';
-// import RecipesContext from '../context/RecipesProvider';
+import myContext from '../context/myContext';
 
 function FoodCardExplorerIn({ name, index }) {
+  const {
+    setRecipesFoods,
+    setAuxRecipesFoods,
+  } = useContext(myContext);
   const { location: { pathname } } = useHistory();
   const [thumbnail, setThumbnail] = useState();
   const location = pathname.split('/')[2];
+  const history = useHistory();
 
   useEffect(() => {
     // loading coloca aqui com setLoading true
@@ -16,30 +21,33 @@ function FoodCardExplorerIn({ name, index }) {
         setThumbnail(`https://www.themealdb.com/images/ingredients/${name}-Small.png`);
       }
     }
-    // searchIngredients();
     checkingLocation();
     console.log(ingredientAPI(name));
-    // console.log(Object.values());
-    // Loading como false
     //  mandar p estado filtrado
   }, [name, pathname, location]);
 
-  // toggle na pag comidas em filterFoods
+  const clickSearchButton = async () => {
+    const recipes = await ingredientAPI(name);
+    console.log(recipes);
+    history.push('/comidas');
+    setAuxRecipesFoods(recipes);
 
+    setRecipesFoods(recipes);
+  };
   // Qnd clicar no card vai aparecer uma lista de receitas com aquele ingrediente
   return (
-    // <Link to={ `/${name}` } onClick={ clickToRecipe }>
-    <div>
-      <div data-testid={ `${index}-ingredient-card` }>
-        <h2 data-testid={ `${index}-card-name` }>{name}</h2>
-        <img
-          src={ thumbnail }
-          alt={ `foto do ingrediente ${name}` }
-          data-testid={ `${index}-card-img` }
-        />
+    <button type="button" onClick={ clickSearchButton }>
+      <div>
+        <div data-testid={ `${index}-ingredient-card` }>
+          <h2 data-testid={ `${index}-card-name` }>{name}</h2>
+          <img
+            src={ thumbnail }
+            alt={ `foto do ingrediente ${name}` }
+            data-testid={ `${index}-card-img` }
+          />
+        </div>
       </div>
-    </div>
-    // </Link>
+    </button>
 
   );
 }
