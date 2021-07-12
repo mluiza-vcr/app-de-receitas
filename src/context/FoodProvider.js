@@ -20,7 +20,7 @@ function FoodProvider({ children }) {
   const [filterDrink, setFilterDrink] = useState([]);
   const [btnToggled, setBtnToggled] = useState('');
   const [btnDrinkToggled, setBtnDrinkToggled] = useState('');
-  // para pegar a info salva no localStorage
+  // para pegar a info salva no localStorage token doneRecipes
   const [readyRecipes, setReadyRecipes] = useState('');
 
   async function fetchMeal() {
