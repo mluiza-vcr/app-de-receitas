@@ -78,8 +78,8 @@ function ReceitasFavoritadas() {
           >
             <img
               src={ favorited
-                ? blackHeartIcon
-                : whiteHeartIcon }
+                ? whiteHeartIcon
+                : blackHeartIcon }
               alt="favorite-button"
               data-testid={ `${index}-horizontal-favorite-btn` }
             />
