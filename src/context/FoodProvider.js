@@ -22,6 +22,8 @@ function FoodProvider({ children }) {
   const [btnDrinkToggled, setBtnDrinkToggled] = useState('');
   // para pegar a info salva no localStorage token doneRecipes
   const [readyRecipes, setReadyRecipes] = useState('');
+  // para pegar o ID e criar a logica de remoção da receita favorita
+  const [idRecipe, setIdRecipe] = useState();
 
   async function fetchMeal() {
     setIsLoading(true);
@@ -99,6 +101,8 @@ function FoodProvider({ children }) {
         setBtnDrinkToggled,
         readyRecipes,
         setReadyRecipes,
+        idRecipe,
+        setIdRecipe,
       } }
     >
       {children}

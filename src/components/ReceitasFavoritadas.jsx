@@ -12,14 +12,12 @@ function ReceitasFavoritadas() {
   const [favoriteRecipe, setFavoriteRecipe] = useState(myStorageFavorite);
 
   const clickFavorite = () => {
-    //  localStorage('favoriteRecipes', JSON.stringify());
-
     setFavorited(!favorited);
   };
 
   function renderElements() {
     return (
-      favoriteRecipe.map((favRecipe, index) => (
+      !favoriteRecipe ? [] : favoriteRecipe.map((favRecipe, index) => (
         <div key={ index }>
           <Link to={ `/${favRecipe.type}s/${favRecipe.id}` } key={ index }>
             <img
