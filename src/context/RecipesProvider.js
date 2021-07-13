@@ -6,6 +6,16 @@ import { fetchDrinksAPI, fetchDrinksCategoriesAPI } from '../services/fetchDrink
 import fetchFoodIngredientsAPI from '../services/fetchFoodIngredientsAPI';
 import fetchDrinkIngredientsAPI from '../services/fetchDrinkIngredientsAPI';
 import fetchFoodAreaAPI from '../services/fetchFoodsAreaAPI';
+import usePersistedState from '../hooks/usePersistedState';
+
+const INITIAL_STATE_PROGRESS = {
+  cocktails: {
+  },
+  meals: {
+  },
+};
+
+const INITIAL_STATE_FAVORITE = [];
 
 const RecipesProvider = ({ children }) => {
   const [recipesFoods, setRecipesFoods] = useState([]);
@@ -19,6 +29,12 @@ const RecipesProvider = ({ children }) => {
   const [drinkCategories, setDrinkCategories] = useState([]);
   const [fetchFood, setFetchFood] = useState([]);
   const [fetchDrinks, setFetchDrinks] = useState([]);
+  const [inProgressRecipes,
+    setInProgressRecipes,
+  ] = usePersistedState('inProgressRecipes', INITIAL_STATE_PROGRESS);
+  const [favoriteRecipes,
+    setFavoriteRecipes,
+  ] = usePersistedState('favoriteRecipes', INITIAL_STATE_FAVORITE);
 
   useEffect(() => {
     fetchFoodsAPI().then((meals) => {
@@ -82,6 +98,10 @@ const RecipesProvider = ({ children }) => {
     },
     setFetchFood,
     setFetchDrinks,
+    inProgressRecipes,
+    setInProgressRecipes,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
 
   return (
