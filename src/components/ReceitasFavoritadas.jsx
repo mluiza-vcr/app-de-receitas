@@ -16,6 +16,7 @@ function ReceitasFavoritadas() {
   };
 
   function renderElements() {
+    if (!favoriteRecipe) return null;
     return (
       !favoriteRecipe ? [] : favoriteRecipe.map((favRecipe, index) => (
         <div key={ index }>

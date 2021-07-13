@@ -5,6 +5,8 @@ import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareIcon from '../images/shareIcon.svg';
 import '../Style/InProgressDrinkOrFood.css';
+import useInProgress from '../hooks/useInProgress';
+import useFavorite from '../hooks/useFavorite';
 
 const disableButton = (fn, foodOrDrink, ingredients) => {
   if (fn(foodOrDrink[0]).length === ingredients.length) {
@@ -24,13 +26,16 @@ function InProgressDrinkOrFood() {
   const [category, setCategory] = useState('');
   const [ingredients, setIngredients] = useState([]);
 
+  console.log(foodOrDrink);
+
   const [shareButton, setShareButton] = useState(false);
-  const [favorited, setFavorited] = useState('');
 
   const urlRequest = url.includes('comidas') ? 'themealdb' : 'thecocktaildb';
 
   const regex = /[\d+]/g;
   const id = url.match(regex).join('');
+
+  const { saveProgressStorage, ingredientsList } = useInProgress(url);
 
   const mapIngredients = (fn = {}) => {
     const filterByIngredients = Object.entries(fn)
@@ -63,9 +68,7 @@ function InProgressDrinkOrFood() {
     fetchAPI();
   }, []);
 
-  const clickFavorite = () => {
-    setFavorited(!favorited);
-  };
+  const { verifyFavorite, clickFavorite } = useFavorite(foodOrDrink, url);
 
   const clickShare = () => {
     navigator.clipboard.writeText(`http://localhost:3000${url.split('/in-progress')[0]}`);
@@ -79,6 +82,7 @@ function InProgressDrinkOrFood() {
     } else {
       target.parentNode.classList.remove('crossed');
     }
+    saveProgressStorage(target);
   };
 
   return (
@@ -109,7 +113,7 @@ function InProgressDrinkOrFood() {
               onClick={ clickFavorite }
             >
               <img
-                src={ favorited
+                src={ verifyFavorite()
                   ? blackHeartIcon
                   : whiteHeartIcon }
                 alt="favorite-button"
@@ -119,7 +123,7 @@ function InProgressDrinkOrFood() {
             <p data-testid="recipe-category">{item[`str${category}`]}</p>
             <ul>
               <h1>Ingredientes</h1>
-              { mapIngredients(foodOrDrink[0]).map((ingredient, index2) => (
+              {mapIngredients(foodOrDrink[0]).map((ingredient, index2) => (
                 <li
                   key={ index2 }
                   data-testid={ `${index2}-ingredient-step` }
@@ -131,6 +135,7 @@ function InProgressDrinkOrFood() {
                       id={ ingredient }
                       type="checkbox"
                       onChange={ handleIngredientChecked }
+                      checked={ ingredientsList.includes(ingredient) }
                     />
                     <span>{`${ingredient} - `}</span>
                     <span>{`${filterByMeasures[index2]}`}</span>
