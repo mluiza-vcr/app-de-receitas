@@ -21,7 +21,7 @@ function FoodProvider({ children }) {
   const [btnToggled, setBtnToggled] = useState('');
   const [btnDrinkToggled, setBtnDrinkToggled] = useState('');
   // para pegar a info salva no localStorage token doneRecipes
-  const [readyRecipes, setReadyRecipes] = useState('');
+  const [readyRecipes, setReadyRecipes] = useState([]);
 
   async function fetchMeal() {
     setIsLoading(true);
