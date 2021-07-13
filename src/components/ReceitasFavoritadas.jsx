@@ -11,8 +11,14 @@ function ReceitasFavoritadas() {
   const [favorited, setFavorited] = useState('');
   const [favoriteRecipe, setFavoriteRecipe] = useState(myStorageFavorite);
 
-  const clickFavorite = () => {
-    setFavorited(!favorited);
+  const checkInList = (myList, id) => myList.some((item) => item.id === id);
+
+  const clickFavorited = (favRecipe) => {
+    if (checkInList(myStorageFavorite, favRecipe.id)) {
+      const newList = myStorageFavorite.filter((item) => item.id !== favRecipe.id);
+      localStorage.setItem('favoriteRecipes', JSON.stringify(newList));
+      setFavoriteRecipe(newList);
+    } setFavorited(!favorited);
   };
 
   function renderElements() {
@@ -57,7 +63,7 @@ function ReceitasFavoritadas() {
 
           <button
             type="button"
-            onClick={ clickFavorite }
+            onClick={ () => clickFavorited(favRecipe) }
           >
             <img
               src={ favorited
