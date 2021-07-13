@@ -2,6 +2,8 @@ import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
 import { Form, Button } from 'react-bootstrap/';
 import LoginContext from '../context/LoginContext';
+import icones1 from '../images/icones1.png';
+import appReceitas from '../images/app_receitas.png';
 import '../Style/Login.css';
 
 /** Source: https://react-bootstrap.netlify.app/components/forms/#forms */
@@ -32,41 +34,58 @@ function Login() {
   }
 
   return (
-    <div className="login-input">
-      <Form onSubmit={ submitLogin }>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Control
-            value={ email }
-            onChange={ (ev) => setEmail(ev.target.value) }
-            data-testid="email-input"
-            type="email"
-            placeholder="Enter email"
-            required
-          />
-        </Form.Group>
+    <section>
+      <div className="img-container">
+        <img
+          className="img-login"
+          src={ icones1 }
+          alt="Panelinha"
+        />
+        <br />
+        <img
+          className="title-login"
+          src={ appReceitas }
+          alt="App de receitas"
+        />
+      </div>
+      <div className="login-input">
+        <Form onSubmit={ submitLogin }>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <input
+              value={ email }
+              className="input-email"
+              onChange={ (ev) => setEmail(ev.target.value) }
+              data-testid="email-input"
+              type="email"
+              placeholder="Enter email"
+              required
+            />
+          </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Control
-            value={ senha }
-            onChange={ (ev) => setSenha(ev.target.value) }
-            type="password"
-            placeholder="Password"
-            data-testid="password-input"
-            pattern="[0-9a-zA-Z]{6,}"
-            required
-          />
-        </Form.Group>
-        <Button
-          variant="outline-success"
-          type="submit"
-          data-testid="login-submit-btn"
-          disabled={ validateLogin() }
-          className="btn-color"
-        >
-          Login
-        </Button>
-      </Form>
-    </div>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <input
+              value={ senha }
+              className="input-email"
+              onChange={ (ev) => setSenha(ev.target.value) }
+              type="password"
+              placeholder="Password"
+              data-testid="password-input"
+              pattern="[0-9a-zA-Z]{6,}"
+              required
+            />
+          </Form.Group>
+          <button
+            variant="outline-success"
+            type="submit"
+            data-testid="login-submit-btn"
+            disabled={ validateLogin() }
+            className="btn-login"
+          >
+            Login
+          </button>
+        </Form>
+      </div>
+    </section>
   );
 }
 
