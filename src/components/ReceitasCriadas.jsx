@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import shareRecipe from '../images/shareIcon.svg';
+import '../Style/BtnCategoriesMain.css';
+import '../Style/MealList.css';
 // import FoodContext from '../context/FoodContext';
 
 function ReceitasCriadas() {
@@ -40,6 +42,7 @@ function ReceitasCriadas() {
         <div key={ index }>
           <Link to={ `/${readyRecipe.type}s/${readyRecipe.id}` } key={ index }>
             <img
+              className="meal-card"
               src={ readyRecipe.image }
               data-testid={ `${index}-horizontal-image` }
               alt="imagem horizontal"
@@ -110,27 +113,32 @@ function ReceitasCriadas() {
 
   return (
     <div>
-      <button
-        data-testid="filter-by-all-btn"
-        type="button"
-        onClick={ btnAll }
-      >
-        All
-      </button>
-      <button
-        data-testid="filter-by-food-btn"
-        type="button"
-        onClick={ btnFood }
-      >
-        Food
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        type="button"
-        onClick={ btnDrink }
-      >
-        Drink
-      </button>
+      <div className="btn-group-main">
+        <button
+          className="btns-main"
+          data-testid="filter-by-all-btn"
+          type="button"
+          onClick={ btnAll }
+        >
+          All
+        </button>
+        <button
+          className="btns-main"
+          data-testid="filter-by-food-btn"
+          type="button"
+          onClick={ btnFood }
+        >
+          Food
+        </button>
+        <button
+          className="btns-main"
+          data-testid="filter-by-drink-btn"
+          type="button"
+          onClick={ btnDrink }
+        >
+          Drink
+        </button>
+      </div>
       { renderElements() }
     </div>
   );

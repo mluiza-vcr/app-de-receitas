@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import shareRecipe from '../images/shareIcon.svg';
+import '../Style/BtnCategoriesMain.css';
+import '../Style/MealList.css';
 
 function ReceitasFavoritadas() {
   const myStorageFavorite = JSON.parse(localStorage.getItem('favoriteRecipes'));
@@ -28,6 +30,7 @@ function ReceitasFavoritadas() {
         <div key={ index }>
           <Link to={ `/${favRecipe.type}s/${favRecipe.id}` } key={ index }>
             <img
+              className="meal-card"
               src={ favRecipe.image }
               data-testid={ `${index}-horizontal-image` }
               alt="imagem horizontal"
@@ -98,27 +101,32 @@ function ReceitasFavoritadas() {
   return (
 
     <div>
-      <button
-        data-testid="filter-by-all-btn"
-        type="button"
-        onClick={ btnAll }
-      >
-        All
-      </button>
-      <button
-        data-testid="filter-by-food-btn"
-        type="button"
-        onClick={ btnFood }
-      >
-        Food
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        type="button"
-        onClick={ btnDrink }
-      >
-        Drink
-      </button>
+      <div className="btn-group-main">
+        <button
+          className="btns-main"
+          data-testid="filter-by-all-btn"
+          type="button"
+          onClick={ btnAll }
+        >
+          All
+        </button>
+        <button
+          className="btns-main"
+          data-testid="filter-by-food-btn"
+          type="button"
+          onClick={ btnFood }
+        >
+          Food
+        </button>
+        <button
+          className="btns-main"
+          data-testid="filter-by-drink-btn"
+          type="button"
+          onClick={ btnDrink }
+        >
+          Drink
+        </button>
+      </div>
       {renderElements()}
     </div>
   );
