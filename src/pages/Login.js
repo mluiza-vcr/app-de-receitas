@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router';
-import { Form, Button } from 'react-bootstrap/';
+import { Form } from 'react-bootstrap/';
 import LoginContext from '../context/LoginContext';
 import icones1 from '../images/icones1.png';
 import appReceitas from '../images/app_receitas.png';
